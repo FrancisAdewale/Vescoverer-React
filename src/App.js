@@ -1,23 +1,61 @@
 import './App.css';
+import firebase from './firebase';
+import Home from './componenets/Home';
+import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+
+
+
+
 
 function App() {
+
+  const [vegan, setVegan] = useState(false)
+  const [shake, setShake] = useState(false);
+
+
+  let result = JSON.parse(localStorage.getItem('isVegan'))
+  console.log(result)
+
+  const db = firebase.firestore
+  const auth = firebase.auth
+
+
+  function isVegan() {
+
+
+    if(vegan) {
+
+      localStorage.setItem("isVegan", JSON.stringify(vegan))
+      
+    } else {
+         setShake(true);
+         setTimeout(() => setShake(false), 2000);
+    }
+  }
+
+  function checkIfVegan(e) {
+    const {type, checked} = e.target
+    setVegan(checked)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='outer'>
+      <div className='middle'>
+        <div className='inner'>
+          
+         <Home 
+        callback={isVegan}
+        handleChange={checkIfVegan}
+        shake={shake}
+        isVegan={vegan}
+         /> 
+
+        </div>
+      </div>
+
     </div>
+   
   );
 }
 
