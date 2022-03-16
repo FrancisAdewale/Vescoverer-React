@@ -1,9 +1,11 @@
 import './App.css';
 import firebase from './firebase';
 import Home from './componenets/Home';
-import Login from "./componenets/Login"
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
+
+
 
 
 function App() {
@@ -21,7 +23,9 @@ function App() {
 
   function isVegan() {
 
+
     if(vegan) {
+
       localStorage.setItem("isVegan", JSON.stringify(vegan))
       
     } else {

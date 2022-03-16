@@ -1,9 +1,12 @@
 import React from "react";
 import logo from "../imgs/vescoverer.png"
+import { Link } from "react-router-dom";
+
+
 
 
 export default function Home(props) {
-    
+
     return (
         <div>
             <img className={props.shake ? "shake" : "home-logo" } src={logo} alt="logo"/>
@@ -16,7 +19,12 @@ export default function Home(props) {
                 />
                 <span className="slider round"></span>
             </label>
-            <button className="home-done-btn" onClick={props.callback}>Done</button>
+
+            {
+                props.isVegan ? <Link to="/login" className="home-done-nav-btn">Done</Link> 
+                : <button className="home-done-btn" onClick={props.callback}>Done</button>
+            }
+            
         </div>
 
     );

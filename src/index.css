@@ -5,6 +5,7 @@
   left: 0;
   height: 100%;
   width: 100%;
+  background-color: #3A3B3C;
 }
 
 .middle {
@@ -20,11 +21,6 @@
 }
 
 
-
-body {
-  background-color: grey;
-
-}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -43,6 +39,7 @@ code {
   display: inline-block;
   width: 60px;
   height: 34px;
+  margin-bottom: 50px;
 }
 
 /* Hide default HTML checkbox */
@@ -100,8 +97,29 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.home-done-nav-btn {
+  font-size: 20px;
+  font-family: sans-serif;
+  text-decoration: none;
+  border-radius: 20px;
+  width: 110px;
+  height: 50px;
+  background: #3797A4;
+  color: white;
+  display: block;
+  margin: 20px auto;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 
 .home-done-btn {
+  font-size: 20px;
+  font-family: sans-serif;
   border-radius: 20px;
   width: 110px;
   height: 50px;
@@ -114,9 +132,9 @@ input:checked + .slider:before {
   
 }
 
-.home-done-btn:hover {background-color: #3797A4}
+.home-done-btn:hover, .home-done-nav-btn:hover {background-color: #3797A4}
 
-.home-done-btn:active {
+.home-done-btn:active, .home-done-nav-btn:active {
   background-color: #3797A4;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -124,6 +142,8 @@ input:checked + .slider:before {
 
 .home-question {
   color: white;
+  margin-top: 70px;
+  margin-bottom: 40px;
 }
 
 
