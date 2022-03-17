@@ -1,14 +1,22 @@
-import React from "react"
-import "../Login.css"
-import GoogleLogin from 'react-google-login';
+import React from "react";
+import "../Login.css";
+import {auth , provider} from '../firebase.js';
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
 export default function Login() {
 
-    const responseGoogle = (response) => {
-        console.log(response);
-      }
+    const navigate = useNavigate()
+
+
+        const signin = () => {
+            auth.signInWithPopup(provider)
+            .catch(alert)
+            .finally(navigate("/register"))
+        }
+    
+
 
     return (
             <div className='login-outer'>
@@ -16,13 +24,8 @@ export default function Login() {
 
                 <div className='login-middle'>
                     <div className='login-inner'>
-                    <GoogleLogin
-                    clientId="932286838218-cie8hb1a9ev1l2b9u4cgock1i7mphmfn.apps.googleusercontent.com"
-                    buttonText="Login / Sign up"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    cookiePolicy={'single_host_origin'}
-                    />
+                    <button style={{"marginTop" : "200px"}} 
+                onClick={signin}>Sign In with Google</button>
                     </div>
                 </div>
             </div>

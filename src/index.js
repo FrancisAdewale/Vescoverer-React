@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Login from "./componenets/Login"
+import Register from './componenets/Register';
+import Login from "./componenets/Login";
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -13,6 +14,7 @@ ReactDOM.render(
   <Routes>
     <Route path="/" element={<App />} />
     <Route path="login" element={<Login />} />
+    <Route path="register" element={<Register />}/>
   </Routes>
   </BrowserRouter>,
   document.getElementById('root')
