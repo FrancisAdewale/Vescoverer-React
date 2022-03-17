@@ -11,9 +11,12 @@ export default function Login() {
 
 
         const signin = () => {
-            auth.signInWithPopup(provider)
-            .catch(alert)
-            .finally(navigate("/register"))
+           const result = auth.signInWithPopup(provider).then(() => {
+            navigate("/register")
+           })
+           .catch(alert)
+          
+            
         }
     
 
