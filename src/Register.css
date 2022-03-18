@@ -20,7 +20,7 @@
   }
 
    
-nav {
+.nav--register-title {
     width: 100%;
     height: 30%;
     background: #3A3B3C;
@@ -29,50 +29,72 @@ nav {
     align-items: center;
     font-size: 50px;
     font-family: sans-serif;
-    color: #3797A4;
+    color: white;
 }
 
-.register-inner > .box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.select-box {
+    cursor: pointer;
+    position : relative;
+    max-width:  20em;
+    margin: 5em auto;
+    width: 100%;
+    background: transparent;
   }
   
-  .register-inner > .box select {
-    background-color: #0563af;
-    color: white;
-    padding: 12px;
-    width: 250px;
-    border: none;
-    font-size: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    -webkit-appearance: button;
-    appearance: button;
-    outline: none;
+  .select,
+  .label {
+    color: #414141;
+    display: block;
+    font: 400 17px/2em 'Source Sans Pro', sans-serif;
   }
   
-  .register-inner > .box::before {
-    content: "\f13a";
-    font-family: sans-serif;
+  .select {
+    width: 100%;
     position: absolute;
     top: 0;
+    padding: 5px 0;
+    height: 40px;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    background: none transparent;
+    border: 0 none;
+  }
+  .select-box1 {
+    background: #ececec;
+  }
+  
+  .label {
+    position: relative;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .open .label::after {
+     content: "▲";
+  }
+  .label::after {
+    content: "▼";
+    font-size: 12px;
+    position: absolute;
     right: 0;
-    width: 20%;
-    height: 100%;
-    text-align: center;
-    font-size: 28px;
-    line-height: 45px;
-    color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
-    pointer-events: none;
+    top: 0;
+    padding: 5px 15px;
+    border-left: 5px solid #fff;
   }
-  
-  .register-inner > .box:hover::before {
-    color: rgba(255, 255, 255, 0.6);
-    background-color: rgba(255, 255, 255, 0.2);
+
+  .form--fullname {
+      display: grid;
+     
   }
-  
-  .register-inner > .box select option {
-    padding: 30px;
+
+  .form--fullname > input {
+       height: 50px;
+       text-align: center;
+       padding: 20px 20px;
+       border-radius: 25px;
+       font-size: 30px;
+       background: gray;
+       margin: 10px;
+       border: none;
+       font-family: sans-serif;
+    
   }
