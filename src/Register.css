@@ -98,3 +98,9 @@
        font-family: sans-serif;
     
   }
+
+  .form--fullname > input {
+      outline: none;
+      border: hidden;
+
+  }

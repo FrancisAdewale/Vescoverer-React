@@ -29,9 +29,28 @@ export default function Register() {
 
                 return {...prevState, veganForCompleted: !sections.veganForCompleted}
             })
+        } 
+        
+        if(id === "name") {
+
+            console.log(id)
+
+            // setSectionCount(sectionCount => sectionCount + 1)
+            // setSections(prevState => {
+
+            //     return {...prevState, nameCompleted: !sections.nameCompleted}
+            // })
+
+
         }
 
     }
+
+    // const renderComponent = () => {
+    //     if(sections.veganForCompleted) {
+    //         return 
+    //     }
+    // }
 
 
 
@@ -49,7 +68,9 @@ export default function Register() {
                 
                 ?
 
-                <Name />
+                <Name
+                callback={changeRegState}
+                />
 
                 : 
 
