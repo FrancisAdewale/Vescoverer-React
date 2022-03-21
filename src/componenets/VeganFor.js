@@ -37,7 +37,7 @@ export default function VeganFor(props) {
 
           <h3 id="timeframe"></h3>
 
-          <button id="vegan" className="home-done-btn" onClick={(e) => props.callback(e)}>Next</button>
+          <button id="vegan" className="vegan-done-btn" onClick={(e) => props.callback(e)}>Next</button>
           
         </div>
          

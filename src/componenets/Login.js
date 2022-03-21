@@ -57,6 +57,8 @@ export default function Login() {
         .catch(error => {
             console.log(error)
         })
+
+        //conditon here to render register parent or dashboard parent.
             navigate("/register")
         }).catch(alert)
             

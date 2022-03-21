@@ -25,7 +25,7 @@ export default function Upload(props) {
     return (
         <form className="form-upload">
             <input type="file" onChange={handleImageUpload}/>
-            <button id="upload" className="home-done-btn" onClick={(e) => props.callback(e)}>Next</button>
+            <button id="upload" className="upload-done-btn" onClick={(e) => props.callback(e)}>Next</button>
         </form>
     )
 }

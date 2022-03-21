@@ -58,7 +58,7 @@ export default function Name(props) {
         <form className="form--fullname">
             <input id="firstName" type="text" placeholder="First Name" onChange={handleFirstName} />
             <input id="secondName" type="text" placeholder="Second Name" onChange={handleSecondName} />
-            <button className="home-done-btn" id="name" onClick={(e) => props.callback(e)}>Next</button>
+            <button className="name-done-btn" id="name" onClick={(e) => props.callback(e)}>Next</button>
 
         </form>
     )

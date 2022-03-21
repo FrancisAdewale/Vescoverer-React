@@ -32,7 +32,7 @@ export default function Gender(props) {
 
           <h3 id="user-gender"></h3>
 
-          <button id="gender" className="home-done-btn" onClick={(e) => props.callback(e)}>Next</button>
+          <button id="gender" className="gender-done-btn" onClick={(e) => props.callback(e)}>Next</button>
           
         </div>
          

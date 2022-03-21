@@ -7,8 +7,13 @@ import Upload from "./componenets/Upload"
 import Socials from "./componenets/Socials"
 import "./Register.css"
 import {auth , provider, db} from './firebase.js';
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 export default function Register() {
+
+
+    const navigate = useNavigate()
 
     const user = auth.currentUser.email
 
@@ -17,12 +22,12 @@ export default function Register() {
     //make array of objects
     const [sections, setSections] = useState(
         [
-            {id : 0, veganForCompleted : false},
-            {id : 1, nameCompleted: false},
-            {id : 2, ageCompleted : false},
-            {id : 3, genderCompleted : false},
-            {id : 4, uploadCompleted : false},
-            {id : 5, socialsCompleted : false}
+            {name : "Vegan For", veganForCompleted : false},
+            {name : "Name", nameCompleted: false},
+            {name : "Age", ageCompleted : false},
+            {name : "Gender", genderCompleted : false},
+            {name : "Upload Image", uploadCompleted : false},
+            {name : "Socials", socialsCompleted : false}
     ]
     )
 
@@ -104,7 +109,7 @@ export default function Register() {
             setSections(temp_state)
         }
 
-        if(id === "Socials") {
+        if(id === "socials") {
 
             let temp_state = [...sections]
 
@@ -118,10 +123,10 @@ export default function Register() {
             db.collection("users").doc(user).set({
                 completedRegistration : true
             }, { merge: true })
+            navigate("/dashboard")
         }
 
     }
-
     const names = ["Vegan For", "Name", "Age", "Gender", "Upload Image", "Socials"]
     return (
         <div className='register-outer'>

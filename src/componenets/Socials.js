@@ -2,8 +2,12 @@ import React from "react"
 import {auth , provider, db} from '../firebase.js';
 import twitter from "../imgs/twitter.png"
 import instagram from "../imgs/instagram-256.png"
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 export default function Socials(props) {
+
+    const navigate = useNavigate()
 
     const user = auth.currentUser.email
 
@@ -19,9 +23,9 @@ export default function Socials(props) {
     const handleTwitter = () => {
         const twitter = prompt("What is your Twitter? Without @ symbol")
         db.collection("users").doc(user).set({
-            twitter : twitter
+            twitter : twitter,
         }, { merge: true })
-
+    
     }
 
 
@@ -32,7 +36,7 @@ export default function Socials(props) {
             <img src={instagram} className="reg-instagram" onClick={handleInstagram}/>
             <img src={twitter} className="reg-twitter" onClick={handleTwitter}/>
             </div>
-            <button className="home-done-btn" id="socials" onClick={(e) => props.callback(e)}>Done</button>
+            <button className="socials-done-btn" id="socials" onClick={(e) => props.callback(e)}>Done</button>
         </>
         
 
