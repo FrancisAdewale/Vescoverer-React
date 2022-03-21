@@ -1,52 +1,52 @@
 import React, {useState} from "react"
+import {auth , provider, db} from '../firebase.js';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function Age() {
+export default function Age(props) {
+
+const user = auth.currentUser.email
 
 const [selectedDate, setSelectedDate] = useState(new Date());
 const [age, setAge] = useState(0)
 
   const handleDateChange = (date) => {
+
     setSelectedDate(date)
+
   }
+   
+    const actualAge = calculateAge(new Date(selectedDate.getFullYear(),selectedDate.getMonth(), selectedDate.getUTCDate()))
+    // setAge(actualAge)
 
-  const year = selectedDate.getFullYear()
-  const month = selectedDate.getMonth()
-  const day = selectedDate.getDay()
+    const h3Eele = document.getElementById("actual-age")
 
-  const actualAge = calculate_age(month,day, year)
+    // h3Eele.textContent = age
 
+    db.collection("users").doc(user).set({
+        age : actualAge
 
-  function calculate_age(month,day,year)
-{
-    let today_date = new Date()
-    let today_year = today_date.getFullYear()
-    let today_month = today_date.getMonth()
-    let today_day = today_date.getDate()
-    let age = today_year - year
+        }, { merge: true })
+  
+  
 
-    if ( today_month < (month - 1))
-    {
-        age--
-    }
-    if (((month - 1) == today_month) && (today_day < day))
-    {
-        age--
-    }
-
-    console.log(age)
+  function calculateAge(date) 
+  {
+    const now = new Date();
+    const diff = Math.abs(now - date );
+    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
     return age
-}
+  } 
 
         return (
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
                 disableToolbar
-                variant="inline"
+                variant="dialog"
                 format="dd/MM/yyyy"
                 margin="normal"
                 id="date-picker-inline"
@@ -59,6 +59,11 @@ const [age, setAge] = useState(0)
                 
             />
             </MuiPickersUtilsProvider>
+            <h3 id="actual-age"></h3>
+            <button className="home-done-btn" id="age" onClick={(e) => props.callback(e)}>Next</button>
+            </>
+            
+
         )
      
           

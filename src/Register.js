@@ -2,6 +2,8 @@ import React, { useState }  from "react"
 import VeganFor from "./componenets/VeganFor"
 import Name from "./componenets/Name"
 import Age from "./componenets/Age"
+import Gender from "./componenets/Gender"
+import Upload from "./componenets/Upload"
 import "./Register.css"
 import {auth , provider, db} from './firebase.js';
 
@@ -30,7 +32,9 @@ export default function Register() {
         e.preventDefault();
         const { id } = e.target
 
-        if(id === "veganForCompleted") {
+        console.log(id)
+
+        if(id === "vegan") {
             setSectionCount(sectionCount => sectionCount + 1)
 
             let temp_state = [...sections]
@@ -46,7 +50,6 @@ export default function Register() {
         
         if(id === "name") {
 
-            console.log(id)
 
             setSectionCount(sectionCount => sectionCount + 1)
             let temp_state = [...sections]
@@ -59,6 +62,45 @@ export default function Register() {
             setSections(temp_state)
         }
 
+        if(id === "age") {
+
+            setSectionCount(sectionCount => sectionCount + 1)
+            let temp_state = [...sections]
+
+            let temp_element = { ...temp_state[2] }
+    
+            temp_element.ageCompleted = !temp_state[2].ageCompleted
+
+            temp_state[2] = temp_element
+            setSections(temp_state)
+        }
+
+        if(id === "gender") {
+
+            setSectionCount(sectionCount => sectionCount + 1)
+            let temp_state = [...sections]
+
+            let temp_element = { ...temp_state[3] }
+    
+            temp_element.genderCompleted = !temp_state[3].genderCompleted
+
+            temp_state[3] = temp_element
+            setSections(temp_state)
+        }
+
+        if(id === "upload") {
+
+            setSectionCount(sectionCount => sectionCount + 1)
+            let temp_state = [...sections]
+
+            let temp_element = { ...temp_state[4] }
+    
+            temp_element.uploadCompleted = !temp_state[4].uploadCompleted
+
+            temp_state[4] = temp_element
+            setSections(temp_state)
+        }
+
     }
 
     const names = ["Vegan For", "Name", "Age", "Gender", "Upload Image", "Socials"]
@@ -68,10 +110,9 @@ export default function Register() {
 
         <div className='register-middle'>
             <div className='register-inner'>
-                
+    {
+    (function() {
 
-{
-(function() {
     switch (true) {
       case (sections[0].veganForCompleted && sections[1].nameCompleted === false):
 
@@ -79,8 +120,20 @@ export default function Register() {
         callback={changeRegState}
         />
         
-      case ( sections[0].veganForCompleted && sections[1].nameCompleted):
-        return <Age />
+      case (sections[2].ageCompleted === false && sections[1].nameCompleted):
+        return <Age
+        callback={changeRegState}
+        />
+
+    case (sections[1].nameCompleted && sections[2].ageCompleted && sections[0].veganForCompleted && sections[3].genderCompleted === false):
+        return <Gender
+        callback={changeRegState}
+        />
+
+        case (sections[4].uploadCompleted === false && sections[3].genderCompleted):
+        return <Upload
+        callback={changeRegState}
+        />
 
       default:
         return <VeganFor 
@@ -89,8 +142,11 @@ export default function Register() {
         />
     }
  
-  })()
-  }
+    })()
+    } 
+                
+
+
                 
             </div>
         </div>
