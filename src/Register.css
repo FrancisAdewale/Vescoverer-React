@@ -12,6 +12,7 @@
   }
   
   .register-inner {
+
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
@@ -39,6 +40,8 @@
     margin: 5em auto;
     width: 100%;
     background: transparent;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+
   }
   
   .select,
@@ -60,6 +63,7 @@
     border: 0 none;
   }
   .select-box1 {
+
     background: #ececec;
   }
   
@@ -82,16 +86,19 @@
   }
 
   .form--fullname {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+
       display: grid;
+      margin-top: -25px;
      
   }
 
   .form--fullname > input {
-       height: 50px;
+       height: 30px;
        text-align: center;
-       padding: 20px 20px;
+       padding: 20px 10px;
        border-radius: 25px;
-       font-size: 30px;
+       font-size: 20px;
        background: gray;
        margin: 10px;
        border: none;
@@ -133,6 +140,18 @@
   .socials-container {
       display: flex;
       justify-content: space-around;
+      animation: 1s ease-out 0s 1 slideInFromLeft;
+
+  }
+
+  .date-picker {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+
+  }
+
+  .form-upload {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+
   }
 
   @keyframes shake {
@@ -148,3 +167,13 @@
     90% { transform: translate(2px, 2px)   rotate(0deg);  }
     100%{ transform: translate(1px, -2px)  rotate(-1deg); }
     }
+
+    @keyframes slideInFromLeft {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    

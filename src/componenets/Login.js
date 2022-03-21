@@ -2,6 +2,7 @@ import "../Login.css";
 import {auth , provider, db} from '../firebase.js';
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import logo from "../imgs/nav-logo.png"
 
 
 
@@ -65,12 +66,16 @@ export default function Login() {
 
     return (
             <div className='login-outer'>
-                <nav>Vescoverer</nav>
+                <nav>
+                <img src={logo} className="nav-logo"/>
+                <h1>Vescoverer</h1>
+                </nav>
 
                 <div className='login-middle'>
                     <div className='login-inner'>
-                    <button style={{"marginTop" : "200px"}} 
-                onClick={signin}>Sign In with Google</button>
+                    <button className="google-btn" onClick={signin}>
+                        Sign In with Google
+                    </button>
                     </div>
                 </div>
             </div>

@@ -42,7 +42,7 @@ const [age, setAge] = useState(0)
   } 
 
         return (
-            <>
+            <div className="date-picker">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                 disableToolbar
@@ -61,7 +61,7 @@ const [age, setAge] = useState(0)
             </MuiPickersUtilsProvider>
             <h3 id="actual-age"></h3>
             <button className="home-done-btn" id="age" onClick={(e) => props.callback(e)}>Next</button>
-            </>
+            </div>
             
 
         )
