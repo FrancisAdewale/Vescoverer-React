@@ -1,12 +1,6 @@
 import './App.css';
-import firebase from './firebase';
 import Home from './componenets/Home';
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
-
-
-
-
 
 function App() {
 
@@ -15,15 +9,8 @@ function App() {
 
 
   let result = JSON.parse(localStorage.getItem('isVegan'))
-  console.log(result)
-
-  const db = firebase.firestore
-  const auth = firebase.auth
-
 
   function isVegan() {
-
-
     if(vegan) {
 
       localStorage.setItem("isVegan", JSON.stringify(vegan))
