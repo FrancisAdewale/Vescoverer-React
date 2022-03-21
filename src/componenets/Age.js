@@ -44,7 +44,7 @@ const [age, setAge] = useState(0)
         return (
             <>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
+                <KeyboardDatePicker
                 disableToolbar
                 variant="dialog"
                 format="dd/MM/yyyy"

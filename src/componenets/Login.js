@@ -47,7 +47,8 @@ export default function Login() {
             longitude : longitude,
             latitude : latitude,
             firstName : firstName,
-            secondName : secondName
+            secondName : secondName,
+            completedRegistration: false
 
         })
         .then(() => {

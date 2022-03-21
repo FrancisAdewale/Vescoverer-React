@@ -4,10 +4,13 @@ import Name from "./componenets/Name"
 import Age from "./componenets/Age"
 import Gender from "./componenets/Gender"
 import Upload from "./componenets/Upload"
+import Socials from "./componenets/Socials"
 import "./Register.css"
 import {auth , provider, db} from './firebase.js';
 
 export default function Register() {
+
+    const user = auth.currentUser.email
 
 
 
@@ -101,6 +104,22 @@ export default function Register() {
             setSections(temp_state)
         }
 
+        if(id === "Socials") {
+
+            let temp_state = [...sections]
+
+            let temp_element = { ...temp_state[5] }
+    
+            temp_element.socialsCompleted = !temp_state[5].socialsCompleted
+
+            temp_state[5] = temp_element
+            setSections(temp_state)
+
+            db.collection("users").doc(user).set({
+                completedRegistration : true
+            }, { merge: true })
+        }
+
     }
 
     const names = ["Vegan For", "Name", "Age", "Gender", "Upload Image", "Socials"]
@@ -132,6 +151,11 @@ export default function Register() {
 
         case (sections[4].uploadCompleted === false && sections[3].genderCompleted):
         return <Upload
+        callback={changeRegState}
+        />
+
+        case (sections[5].socialsCompleted === false && sections[4].uploadCompleted):
+        return <Socials
         callback={changeRegState}
         />
 
