@@ -1,0 +1,39 @@
+.dashboard-outer {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #3A3B3C;
+    
+  }
+  
+  .dashboard-middle {
+    display: table-cell;
+    vertical-align: top;
+   
+ 
+  
+  }
+  
+  .dashboard-inner {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 62%;
+    max-width: 65%;
+    background: #3797A4;
+    height: 90%;
+   
+  }
+
+  
+
+  .custom-tab:focus {
+
+    color: #3797A4 !important;
+  }
+  
+
+ 

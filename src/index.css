@@ -114,6 +114,27 @@ input:checked + .slider:before {
   align-items: center;
 }
 
+.white-blob {
+  float: right;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 380px;
+  height: 380px;
+  margin-right: -150px;
+  margin-top: -150px;
+}
+
+.brand-blob {
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  margin-left: -150px;
+ 
+}
+
 
 
 

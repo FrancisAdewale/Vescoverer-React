@@ -1,6 +1,8 @@
 import './App.css';
 import Home from './componenets/Home';
 import { useEffect, useState } from 'react';
+import WhiteBlob from "./imgs/white-blob.png"
+import BrandBlob from "./imgs/brand-blob.png"
 
 function App() {
 
@@ -28,7 +30,11 @@ function App() {
 
   return (
     <div className='outer'>
+       
       <div className='middle'>
+      <img src={WhiteBlob} className="white-blob" />
+      <img src={BrandBlob} className="brand-blob" />
+       
         <div className='inner'>
           
          <Home 
