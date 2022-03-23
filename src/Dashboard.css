@@ -5,7 +5,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: #3A3B3C;
+    background: rgb(61, 61, 61);
     
   }
   
@@ -23,17 +23,94 @@
     margin-top: 30px;
     width: 62%;
     max-width: 65%;
-    background: #3797A4;
+    background: rgb(61, 61, 61);
     height: 90%;
    
   }
 
   
 
-  .custom-tab:focus {
+  table {
+  table-layout: fixed;
+  width: 80%;
+  background: rgb(61, 61, 61);
+  border-width: 39px;
+  color: white;
+  margin: 0 auto;
+  
+}
 
-    color: #3797A4 !important;
+
+thead th:nth-child(1) {
+  width: 30%;
+  text-align: right;
+  color: #3797A4;;
+}
+
+thead th:nth-child(2) {
+  width: 40%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+thead th:nth-child(4) {
+  width: 35%;
+
+}
+
+thead th:nth-child(6) {
+    width: 35%;
+    
+  
+  }
+
+th, td {
+  padding: 20px;
+}
+
+
+tbody tr:nth-child(1) {
+    background-color: #272829;
   }
   
+  tbody tr:nth-child(2) {
+    background-color: #272829;
+  }
 
+  tbody tr:nth-child(3) {
+    background-color: #272829;
+  }
+
+  tbody tr:nth-child(3) {
+    background-color: #272829;
+  }
+
+  tbody tr:nth-child(4) {
+    background-color: rgb(61, 61, 61);
+  }
+
+  tbody tr:nth-child(5) {
+    background-color: #272829;
+  }
+
+  tbody tr:nth-child(6) {
+    background-color: #272829;
+  }
+  tbody tr:nth-child(7) {
+    background-color: #272829;
+  }
+
+  .account--avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50px;
+  }
+  
+  
+  
+  
+  
  
+  

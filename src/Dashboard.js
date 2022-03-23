@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -8,21 +8,42 @@ import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined"
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined"
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined"
 import { makeStyles } from "@material-ui/core";
-
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import "./Dashboard.css"
 import Account from "./componenets/Account"
+import {auth , provider, db} from './firebase.js';
+
+
 
 
 export default function Dashboard() {
 
-    const [value, setValue] = React.useState(0);
+    const user = auth.currentUser.email
+
+    const [value, setValue] = useState(0);
+
+    const [account, setUserAccount] = useState({}) 
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
+
+    useEffect(() => {
+        db.collection("users").doc(user).get()
+        .then(doc => {
+            if (doc.exists) {
+                setUserAccount(doc.data())
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+    }, [])
+        
+    
 
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
@@ -86,7 +107,17 @@ export default function Dashboard() {
                     </Tabs>
                     </Paper>
                     <TabPanel value={value} index={0}>
-                        <Account />
+                        <Account 
+                        firstName={account.firstName}
+                        secondName={account.secondName}
+                        imgPath={account.imagePath}
+                        age={account.age}
+                        veganFor={account.veganFor}
+                        gender={account.gender}
+                        lat={account.latitude}
+                        lng={account.longitude}
+                        
+                        />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         Verify
