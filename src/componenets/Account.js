@@ -3,6 +3,10 @@ import React, {useEffect, useState} from "react"
 import AccInstaIcon from "../imgs/account-instagram.png"
 import AccTwitterIcon from "../imgs/account-twitter.png"
 import Geocode from "react-geocode";
+import Tooltip from '@mui/material/Tooltip';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import EditPopUp from "./EditPopUp";
+
 
 
 
@@ -10,6 +14,11 @@ import Geocode from "react-geocode";
 export default function Account(props) {
 
     const [address, setAddress] = useState("")
+    const [isOpen, setIsOpen] = useState(false);
+ 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
     const lng = props.lng
     const lat = props.lat
 
@@ -35,17 +44,25 @@ export default function Account(props) {
             }
             );
 
-    }, [])
+    }, [address])
+
+    const handleEdit = () => {
+
+        setIsOpen(!isOpen)
+
+    }
 
     
-
-
 
     return (
             <table>
                 <thead>
                     <tr>
-                    <th scope="row" colSpan={2}>Edit</th>
+                    <th scope="row" colSpan={2}>
+                        <Tooltip title="Edit Account">
+                        <ModeEditOutlineOutlinedIcon onClick={handleEdit}/>
+                        </Tooltip>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,17 +83,23 @@ export default function Account(props) {
                     </tr>
                     <tr>
                     <th scope="row"colSpan={2}> 
+                        <Tooltip title={`@${props.instagram}`}>
                         <img src={AccInstaIcon} style={{
                             display: "inline-block",
                             margin: " 0 40px"
                             
-                        }} />
+                        }}/>
+
+                        </Tooltip>
+
+                        <Tooltip title={`@${props.twitter}`}>
                         <img src={AccTwitterIcon} style={{
                             display: "inline-block",
                             margin: " 0 40px"
 
                         }}/> 
-
+                        </Tooltip>
+                        
                     </th>
                     </tr>
                     <tr>
@@ -89,6 +112,24 @@ export default function Account(props) {
                     <button style={{backgroundColor : "red"}}>Delete Account</button></th>
                     </tr>
                 </tfoot>
+                {isOpen && <EditPopUp
+      content={<>
+        <form className="form--popup">
+            <legend><h3>Edit Account</h3></legend>
+            <input type="text" placeholder="First Name" value={props.firstName}/>
+            <input type="text" placeholder="Second Name" value={props.secondName}/>
+            <input type="text" placeholder="Instagram" value={props.instagram}/>
+            <input type="text" placeholder="Twitter" value={props.twitter}/>
+            <input type="file"/>
+            <button>Test button</button>
+
+        </form>
+        
+      </>}
+      handleClose={togglePopup}
+    />}
             </table>
+
+            
     )
 }

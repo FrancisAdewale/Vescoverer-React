@@ -97,7 +97,6 @@ export default function Dashboard() {
                     textColor="primary"
                     onChange={handleChange}
                     aria-label="disabled tabs example"
-                    classes={{indicator: classes.indicator }}
                     >
                     <Tab label="Account" icon={<AccountBoxOutlinedIcon />} {...a11yProps(0)} />
                     <Tab label="Verify" icon={<DoneOutlineOutlinedIcon />} {...a11yProps(1)} />
@@ -116,6 +115,8 @@ export default function Dashboard() {
                         gender={account.gender}
                         lat={account.latitude}
                         lng={account.longitude}
+                        instagram={account.instagram}
+                        twitter={account.twitter}
                         
                         />
                     </TabPanel>
