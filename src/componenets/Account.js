@@ -1,14 +1,12 @@
 import { Margin, PropaneSharp } from "@mui/icons-material"
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState, useReducer} from "react"
 import AccInstaIcon from "../imgs/account-instagram.png"
 import AccTwitterIcon from "../imgs/account-twitter.png"
 import Geocode from "react-geocode";
 import Tooltip from '@mui/material/Tooltip';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import EditPopUp from "./EditPopUp";
-
-
-
+import {auth , provider, db} from '../firebase.js';
 
 
 export default function Account(props) {
@@ -22,6 +20,10 @@ export default function Account(props) {
     const [newImage, setNewImage] = useState('')
 
 
+
+    const user = auth.currentUser.email
+
+
  
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -33,11 +35,12 @@ export default function Account(props) {
 
     }
 
+  
+
     const handleUploadClick = event => {
 
         event.preventDefault()
         hiddenFileInput.current.click();
-        console.log(hiddenFileInput)
         
       };
 
@@ -57,6 +60,37 @@ export default function Account(props) {
         }
 
     }
+
+    const handleFileChange = (event) => {
+
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+
+                setNewImage(e.target.result)
+            };
+            reader.readAsDataURL(event.target.files[0]);
+          }
+    }  
+
+    const submitChange = (event) => {
+
+        event.preventDefault()
+
+
+        db.collection("users").doc(user).set({
+            imagePath : newImage,
+            firstName : editFirstname,
+            secondName : editSecondName,
+            twitter : editTwitter,
+            instagram: editInstagram
+    
+            }, { merge: true })
+
+
+            
+    }
+
 
     return (
             <table>
@@ -120,21 +154,25 @@ export default function Account(props) {
       content={<>
         <form className="form--popup">
             <legend><h3>Edit Account</h3></legend>
-            <input type="text" id="firstName" placeholder="First Name" value={props.firstName} onChange={handleChange}/>
-            <input type="text" id="secondName" placeholder="Second Name" value={props.secondName } onChange={handleChange}/>
-            <input type="text" id="instagram"placeholder="Instagram" value={props.instagram} onChange={handleChange}/>
-            <input type="text" id="twitter"placeholder="Twitter" value={props.twitter} onChange={handleChange}/>
+            <input type="text" id="firstName" placeholder={props.firstName} onChange={handleChange}/>
+            <input type="text" id="secondName" placeholder={props.secondName }  onChange={handleChange}/>
+            <input type="text" id="instagram"placeholder={props.instagram}onChange={handleChange}/>
+            <input type="text" id="twitter"placeholder={props.twitter} onChange={handleChange}/>
             <button className="home-done-btn" onClick={handleUploadClick}>New Avatar</button>
             <input type="file" id="image" style={{
                 display : "none"
-            }} ref={hiddenFileInput}/>
-            <button >Done</button>
+            }} ref={hiddenFileInput}
+            onChangeCapture={handleFileChange}
+            />
+            <button onClick={submitChange}>Done</button>
 
         </form>
         
       </>}
       handleClose={togglePopup}
     />}
+
+    
             </table>
 
             

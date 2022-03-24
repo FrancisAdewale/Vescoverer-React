@@ -28,6 +28,8 @@ export default function Dashboard() {
 
     const [value, setValue] = useState(0);
     const [address, setAddress] = useState("")
+    const [update, setUpdate] = useState(false)
+
 
 
     const [account, setUserAccount] = useState({}) 
@@ -59,18 +61,16 @@ export default function Dashboard() {
         .then(doc => {
             if (doc.exists) {
                 setUserAccount(doc.data())
-               
             }
         })
         .catch(error => {
             console.log(error)
         })
 
-
     }, [])
 
     useEffect(() => {
-        
+
         Geocode.fromLatLng(lat, lng).then(
             (response) => {
                 const address = response.results[5].formatted_address;
@@ -84,9 +84,10 @@ export default function Dashboard() {
     }, [account])
 
 
+
+
        
-    
-    
+
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
       
@@ -120,11 +121,6 @@ export default function Dashboard() {
         };
       }
       
-      const classes = makeStyles((theme) => ({
-        indicator: {
-            backgroundColor : "#3797A4"
-        },
-      }));
 
 
     return (
