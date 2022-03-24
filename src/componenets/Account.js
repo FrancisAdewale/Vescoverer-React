@@ -22,7 +22,7 @@ export default function Account(props) {
     const lng = props.lng
     const lat = props.lat
 
-    Geocode.setApiKey("AIzaSyA3RqIQZzvJfUWxsicl_YAalCTqI0zgp7I");
+    Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
 
     Geocode.setLanguage("en");
 
@@ -44,7 +44,7 @@ export default function Account(props) {
             }
             );
 
-    }, [address])
+    }, [])
 
     const handleEdit = () => {
 
