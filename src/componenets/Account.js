@@ -13,38 +13,19 @@ import EditPopUp from "./EditPopUp";
 
 export default function Account(props) {
 
-    const [address, setAddress] = useState("")
     const [isOpen, setIsOpen] = useState(false);
+    const [editFirstname, setEditFirstName] = useState('')
+    const [editSecondName, setEditSecondName] = useState('')
+    const [editInstagram, setEditInstagram] = useState('')
+    const [editTwitter, setEditTwitter] = useState('')
+    const hiddenFileInput = React.useRef(null);
+    const [newImage, setNewImage] = useState('')
+
+
  
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }
-    const lng = props.lng
-    const lat = props.lat
-
-    Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
-
-    Geocode.setLanguage("en");
-
-
-    Geocode.setRegion("en");
-
-    Geocode.setLocationType("APPROXIMATE");
-
-    Geocode.enableDebug();
-
-    useEffect(() => {
-        Geocode.fromLatLng(lat, lng).then(
-            (response) => {
-                const address = response.results[5].formatted_address;
-                setAddress(address)
-            },
-            (error) => {
-                console.error(error);
-            }
-            );
-
-    }, [])
 
     const handleEdit = () => {
 
@@ -52,7 +33,30 @@ export default function Account(props) {
 
     }
 
-    
+    const handleUploadClick = event => {
+
+        event.preventDefault()
+        hiddenFileInput.current.click();
+        console.log(hiddenFileInput)
+        
+      };
+
+    const handleChange = event => {
+
+        const {id, value} = event.target
+
+        switch(id) {
+            case "firstName":
+                setEditFirstName(value)
+            case "secondName":
+                setEditSecondName(value)
+            case "instagram":
+                setEditInstagram(value)
+            default:
+                setEditTwitter(value)
+        }
+
+    }
 
     return (
             <table>
@@ -103,7 +107,7 @@ export default function Account(props) {
                     </th>
                     </tr>
                     <tr>
-                    <th scope="row"colSpan={2}><h3>{address}</h3></th>
+                    <th scope="row"colSpan={2}><h3>{props.address}</h3></th>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -116,12 +120,15 @@ export default function Account(props) {
       content={<>
         <form className="form--popup">
             <legend><h3>Edit Account</h3></legend>
-            <input type="text" placeholder="First Name" value={props.firstName}/>
-            <input type="text" placeholder="Second Name" value={props.secondName}/>
-            <input type="text" placeholder="Instagram" value={props.instagram}/>
-            <input type="text" placeholder="Twitter" value={props.twitter}/>
-            <input type="file"/>
-            <button>Test button</button>
+            <input type="text" id="firstName" placeholder="First Name" value={props.firstName} onChange={handleChange}/>
+            <input type="text" id="secondName" placeholder="Second Name" value={props.secondName } onChange={handleChange}/>
+            <input type="text" id="instagram"placeholder="Instagram" value={props.instagram} onChange={handleChange}/>
+            <input type="text" id="twitter"placeholder="Twitter" value={props.twitter} onChange={handleChange}/>
+            <button className="home-done-btn" onClick={handleUploadClick}>New Avatar</button>
+            <input type="file" id="image" style={{
+                display : "none"
+            }} ref={hiddenFileInput}/>
+            <button >Done</button>
 
         </form>
         

@@ -14,6 +14,8 @@ import PropTypes from 'prop-types';
 import "./Dashboard.css"
 import Account from "./componenets/Account"
 import {auth , provider, db} from './firebase.js';
+import Geocode from "react-geocode";
+
 
 
 
@@ -22,7 +24,11 @@ export default function Dashboard() {
 
     const user = auth.currentUser.email
 
+    
+
     const [value, setValue] = useState(0);
+    const [address, setAddress] = useState("")
+
 
     const [account, setUserAccount] = useState({}) 
 
@@ -30,21 +36,57 @@ export default function Dashboard() {
       setValue(newValue);
     };
 
+    const lng = account.longitude
+    const lat = account.latitude
+
+   
+
+    Geocode.setApiKey("AIzaSyA3RqIQZzvJfUWxsicl_YAalCTqI0zgp7I");
+
+    Geocode.setLanguage("en");
+
+
+    Geocode.setRegion("en");
+
+    Geocode.setLocationType("APPROXIMATE");
+
+    Geocode.enableDebug();
+
+
     useEffect(() => {
+
         db.collection("users").doc(user).get()
         .then(doc => {
             if (doc.exists) {
                 setUserAccount(doc.data())
+               
             }
         })
         .catch(error => {
             console.log(error)
         })
 
-    }, [])
-        
-    
 
+    }, [])
+
+    useEffect(() => {
+        
+        Geocode.fromLatLng(lat, lng).then(
+            (response) => {
+                const address = response.results[5].formatted_address;
+                setAddress(address)
+            },
+            (error) => {
+                console.error(error);
+            }
+            );
+
+    }, [account])
+
+
+       
+    
+    
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
       
@@ -113,10 +155,9 @@ export default function Dashboard() {
                         age={account.age}
                         veganFor={account.veganFor}
                         gender={account.gender}
-                        lat={account.latitude}
-                        lng={account.longitude}
                         instagram={account.instagram}
                         twitter={account.twitter}
+                        address={address}
                         
                         />
                     </TabPanel>
