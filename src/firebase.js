@@ -15,5 +15,6 @@ firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var db = firebase.firestore()
 var provider = new firebase.auth.GoogleAuthProvider(); 
+var signOut = firebase.auth.signOut
 
 export {auth , provider, db};

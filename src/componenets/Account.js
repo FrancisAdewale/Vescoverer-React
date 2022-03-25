@@ -6,10 +6,14 @@ import Geocode from "react-geocode";
 import Tooltip from '@mui/material/Tooltip';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import EditPopUp from "./EditPopUp";
-import {auth , provider, db} from '../firebase.js';
+import {auth , provider, db, signOut} from '../firebase.js';
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 export default function Account(props) {
+
+    const navigate = useNavigate()
+
 
     const [isOpen, setIsOpen] = useState(false);
     const [editFirstname, setEditFirstName] = useState('')
@@ -73,6 +77,18 @@ export default function Account(props) {
           }
     }  
 
+    const logout = () => {
+
+        auth.signOut()
+        .then(() => {
+            navigate("/login")
+
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
 
 
 
@@ -131,7 +147,7 @@ export default function Account(props) {
                 </tbody>
                 <tfoot>
                     <tr>
-                    <th scope="row" colSpan={2}><button style={{backgroundColor: "#3797A4"}}>Sign Out</button> 
+                    <th scope="row" colSpan={2}><button style={{backgroundColor: "#3797A4"}} onClick={logout}>Sign Out</button> 
                     <button style={{backgroundColor : "red"}}>Delete Account</button></th>
                     </tr>
                 </tfoot>
