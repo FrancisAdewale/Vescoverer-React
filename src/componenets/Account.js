@@ -73,23 +73,8 @@ export default function Account(props) {
           }
     }  
 
-    const submitChange = (event) => {
-
-        event.preventDefault()
 
 
-        db.collection("users").doc(user).set({
-            imagePath : newImage,
-            firstName : editFirstname,
-            secondName : editSecondName,
-            twitter : editTwitter,
-            instagram: editInstagram
-    
-            }, { merge: true })
-
-
-            
-    }
 
 
     return (
@@ -164,7 +149,8 @@ export default function Account(props) {
             }} ref={hiddenFileInput}
             onChangeCapture={handleFileChange}
             />
-            <button onClick={submitChange}>Done</button>
+            <button 
+            onClick={(e) => props.updateParent(e, editFirstname, editSecondName, editTwitter, editInstagram, newImage)}>Done</button>
 
         </form>
         

@@ -22,7 +22,8 @@ import Geocode from "react-geocode";
 
 export default function Dashboard() {
 
-    const user = auth.currentUser.email
+
+    const [user, setUser] = useState(auth.currentUser.email)
 
     
 
@@ -67,7 +68,7 @@ export default function Dashboard() {
             console.log(error)
         })
 
-    }, [])
+    }, [update])
 
     useEffect(() => {
 
@@ -82,6 +83,25 @@ export default function Dashboard() {
             );
 
     }, [account])
+
+   
+
+    const updateMyUser = (event, fName, sName, twit, insta , newImage) => {
+        event.preventDefault()
+
+            db.collection("users").doc(user).set({
+            imagePath : newImage,
+            firstName : fName,
+            secondName : sName,
+            twitter : twit,
+            instagram: insta
+    
+            }, { merge: true })
+
+        setUpdate(true)
+
+    }
+
 
 
 
@@ -154,6 +174,7 @@ export default function Dashboard() {
                         instagram={account.instagram}
                         twitter={account.twitter}
                         address={address}
+                        updateParent={updateMyUser}
                         
                         />
                     </TabPanel>
