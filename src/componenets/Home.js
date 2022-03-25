@@ -1,11 +1,15 @@
-import React from "react";
+import React ,{useState} from "react";
 import logo from "../imgs/vescoverer.png"
 import { Link } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 
 
 
 export default function Home(props) {
+
+  
 
     return (
         <div>
