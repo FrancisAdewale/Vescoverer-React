@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import "./Dashboard.css"
 import Account from "./componenets/Account"
+import Vescover from "./componenets/Vescover"
 import {auth , provider, db} from './firebase.js';
 import Geocode from "react-geocode";
 
@@ -41,6 +42,7 @@ export default function Dashboard() {
 
     const lng = account.longitude
     const lat = account.latitude
+    
 
    
 
@@ -182,7 +184,7 @@ export default function Dashboard() {
                         Verify
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        Vescover
+                        <Vescover />
                     </TabPanel>
                     <TabPanel value={value} index={3}>
                         Vescovered

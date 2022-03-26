@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import {auth , provider, db} from '../firebase.js';
+import upload from "../imgs/upload.png"
 
 
 export default function Upload(props) {
@@ -35,7 +36,7 @@ export default function Upload(props) {
 
     return (
         <form className="form-upload">
-            <button className="upload-done-btn" onClick={handleUploadClick}>Upload Avatar</button>
+            <img src={upload} onClick={handleUploadClick} style={{width: "130px", height : "130px"}}/>
             <input type="file" id="image" style={{
                 display : "none"
             }} ref={hiddenFileInput}

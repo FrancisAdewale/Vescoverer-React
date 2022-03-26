@@ -27,7 +27,7 @@ export default function Gender(props) {
           <label for="select-box1" className="label select-box1"><span className="label-desc">Choose Your Gender</span> </label>
           <select id="select-box1" className="select" onChange={handleChange}>
             <option value="Male">Male</option>
-            <option value="Female">Female</option>
+            <option value="Female" selected={true}>Female</option>
           </select>
 
           <h3 id="user-gender"></h3>

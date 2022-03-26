@@ -6,7 +6,7 @@ import Geocode from "react-geocode";
 import Tooltip from '@mui/material/Tooltip';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import EditPopUp from "./EditPopUp";
-import {auth , provider, db, signOut} from '../firebase.js';
+import {auth , provider, db} from '../firebase.js';
 import { Navigate, useNavigate } from "react-router-dom";
 
 
@@ -89,6 +89,18 @@ export default function Account(props) {
         })
     }
 
+    const deleteAcc = () => {
+        db.collection("users").doc(user).delete().then(() => {
+            console.log("Document successfully deleted!");
+            navigate("/login")
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
+
+    
+
+
 
 
 
@@ -106,7 +118,8 @@ export default function Account(props) {
                 </thead>
                 <tbody>
                     <tr>
-                    <th scope="row" colSpan={2}><img className="account--avatar" src={props.imgPath}/><h3>{`${props.firstName} ${props.secondName}`}</h3>  </th>
+                    <th scope="row" colSpan={2}><img className="account--avatar" src={props.imgPath}/><h3 id="acc-full-name">{(props.firstName !== undefined &&
+                        props.secondName !== undefined) ? `${props.firstName} ${props.secondName}` : "" }</h3>  </th>
                     </tr>
                     <tr>
                     <th scope="row"colSpan={2}><h3>{props.age}</h3></th>
@@ -148,7 +161,7 @@ export default function Account(props) {
                 <tfoot>
                     <tr>
                     <th scope="row" colSpan={2}><button style={{backgroundColor: "#3797A4"}} onClick={logout}>Sign Out</button> 
-                    <button style={{backgroundColor : "red"}}>Delete Account</button></th>
+                    <button style={{backgroundColor : "red", marginLeft : "16px"}} onClick={deleteAcc}>Delete Account</button></th>
                     </tr>
                 </tfoot>
                 {isOpen && <EditPopUp

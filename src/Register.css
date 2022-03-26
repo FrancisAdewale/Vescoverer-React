@@ -197,3 +197,8 @@
         }
       }
     
+      #timeframe, #user-gender {
+          color: white;
+          font-family: sans-serif;
+
+      }

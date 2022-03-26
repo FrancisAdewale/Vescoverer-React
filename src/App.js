@@ -26,7 +26,7 @@ function App() {
       navigate("/login")
     }
     
-  }, [vegan])
+  }, [])
 
 
     
