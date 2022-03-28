@@ -5,16 +5,25 @@ import Marker from './Marker';
 
 
 
-export default function Vescover() {
+
+
+export default function Vescover(props) {
 
     const [userList, setUserList] =  useState([])
+    const [isOpen, setIsOpen] = useState(false);
+    const [userDetails, setUserDetails] = useState({})
+
+    const lng = userDetails.longitude
+    const lat = userDetails.latitude
+
+    const user = auth.currentUser.email
 
     const defaultProps = {
         center: {
-          lat: 59.95,
-          lng: 30.33
+          lat: 48.864716,
+          lng: 2.349014
         },
-        zoom: 4
+        zoom: 2
       };
 
      
@@ -23,32 +32,69 @@ export default function Vescover() {
         db.collection("users").get()
         .then(querySnapshot => {
             querySnapshot.forEach((doc) => {
-                users.push(doc.data())
-                setUserList(users)
+                if(doc.id != user) {
+                    users.push(doc.data())
+                }
         })
+        setUserList(users)
+
     })
         .catch(error => {
             console.log(error)
         })
 
-        // const markers = users.map(e => {
-        //     console.log(e)
-        //     return <Marker
-        //         key={e.email} 
-        //         lat={e.latitude}
-        //         lng={e.longitude}
-        //         name={e.firstName}
-        //         color="#3797A4"
-            
-        //     />
-        // })
-
-
-
+      
       const handleApiLoaded = (map, maps) => {
         
       };
-      
+
+   
+    const vescoverUser = (e, id) => {
+
+        props.updateParent()
+
+        var age = 0
+        var firstName = ""
+        var veganSince = ""
+        var imagePath = ""
+        
+
+        db.collection("users").doc(id).get()
+        .then(doc => {
+            if (doc.exists) {
+
+                console.log(doc.data().age)
+
+                age = doc.data().age
+                firstName = doc.data().firstName
+                veganSince = doc.data().veganFor
+                imagePath = doc.data().imagePath
+            }
+        })
+        .then(() => {
+            db.collection("users").doc(user).collection("vescovered").doc(id)
+       .set({
+            email : id,
+            firstName : firstName,
+            age: age,
+            veganSince : veganSince,
+            image: imagePath
+        })
+        .catch(error => {
+            console.log(error)
+            })
+        })
+
+
+        .catch(error => {
+            console.log(error)
+        })
+
+       
+
+    }
+
+  
 
    
 
@@ -70,17 +116,15 @@ export default function Vescover() {
                     lng={e.longitude}
                     name={e.firstName}
                     color="#3797A4"
+                    id={e.email}
+                    handleClick={vescoverUser}
                 
                 />
-
                 })
              
-
             }
-           
-        
-       
         </GoogleMapReact>
+       
       </div>
         
         

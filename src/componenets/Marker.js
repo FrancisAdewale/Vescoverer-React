@@ -7,9 +7,7 @@ const Marker = (props) => {
 
     const { color, name, id,} = props;
 
-    const handleClick = () => {
-        console.log(`You clicked`);
-      };
+
 
       const hover = e => {
           e.target.style.backgroundColor = "#272829"
@@ -23,8 +21,8 @@ const Marker = (props) => {
     return (
       <div className={"marker"}
         style={{ backgroundColor: color, cursor: 'pointer'}}
-        title={name}
-        onClick={handleClick}
+        title={`Add ${name}`}
+        onClick={(e) => props.handleClick(e, id)}
         onMouseOver={hover}
         onMouseLeave={unHover}
       />

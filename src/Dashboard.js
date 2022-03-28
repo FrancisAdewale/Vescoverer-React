@@ -16,6 +16,8 @@ import Account from "./componenets/Account"
 import Vescover from "./componenets/Vescover"
 import {auth , provider, db} from './firebase.js';
 import Geocode from "react-geocode";
+import Badge from '@mui/material/Badge';
+import Vescovered from "./componenets/Vescovered"
 
 
 
@@ -25,6 +27,10 @@ export default function Dashboard() {
 
 
     const [user, setUser] = useState(auth.currentUser.email)
+
+    const [badgeCount, setBadgeCount] = useState(0)
+
+    const [hasClickedBadge, setHasClickedBadge] = useState(false)
 
     
 
@@ -76,7 +82,7 @@ export default function Dashboard() {
 
         Geocode.fromLatLng(lat, lng).then(
             (response) => {
-                const address = response.results[5].formatted_address;
+                const address = response.results[2].formatted_address;
                 setAddress(address)
             },
             (error) => {
@@ -142,6 +148,10 @@ export default function Dashboard() {
           'aria-controls': `simple-tabpanel-${index}`,
         };
       }
+
+      const addBadgeCount = () => {
+          setBadgeCount(prev => prev + 1)
+      }
       
 
 
@@ -158,10 +168,20 @@ export default function Dashboard() {
                     onChange={handleChange}
                     aria-label="disabled tabs example"
                     >
-                    <Tab label="Account" icon={<AccountBoxOutlinedIcon />} {...a11yProps(0)} />
+                    <Tab label="Account" icon={<AccountBoxOutlinedIcon /> } {...a11yProps(0)} />
                     <Tab label="Verify" icon={<DoneOutlineOutlinedIcon />} {...a11yProps(1)} />
                     <Tab label="Vescover" icon={<ExploreOutlinedIcon />} {...a11yProps(2)} />
-                    <Tab label="Vescovered"  icon={<FolderOpenOutlinedIcon/>} {...a11yProps(3)} />
+                    <Tab label="Vescovered"  icon={
+                    
+                    <Badge badgeContent={badgeCount} sx={{
+                        "& .MuiBadge-badge": {
+                        color: "white",
+                        backgroundColor: "#3797A4"
+                        }}}> 
+                        <FolderOpenOutlinedIcon/> 
+    
+                        </Badge>} {...a11yProps(3)} 
+                    />  
                     <Tab label="Recipes" icon={<FormatListBulletedOutlinedIcon /> } {...a11yProps(4)} />
                     </Tabs>
                     </Paper>
@@ -184,10 +204,12 @@ export default function Dashboard() {
                         Verify
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <Vescover />
+                        <Vescover 
+                        updateParent={addBadgeCount}
+                        />
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        Vescovered
+                        <Vescovered />
                     </TabPanel>
                     <TabPanel value={value} index={4}>
                         Recipes
