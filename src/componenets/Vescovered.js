@@ -8,7 +8,7 @@ import AccTwitterIcon from "../imgs/account-twitter.png"
 import Geocode from "react-geocode";
 
 
-export default function Vescovered() {
+export default function Vescovered(props) {
 
     const [vescoveredUsers, setVescoveredUsers] = useState([])
     const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +28,8 @@ export default function Vescovered() {
     Geocode.enableDebug();
 
     useEffect(() => {
+
+        props.updateBadge()
 
         Geocode.fromLatLng(lat, lng).then(
             (response) => {
@@ -121,7 +123,7 @@ export default function Vescovered() {
                     <th scope="row"colSpan={2}> <h3>{`Vegan For: ${userDetails.veganFor !== undefined ? userDetails.veganFor : ""}`}</h3> </th>
                     </tr>
                     <tr>
-                    <th scope="row"colSpan={2}></th>
+                    <th scope="row"colSpan={2} className="blank-item"></th>
                     </tr>
                     <tr>
                     <th scope="row"colSpan={2}> <h3>{userDetails.gender}</h3> </th>
@@ -133,7 +135,10 @@ export default function Vescovered() {
                             display: "inline-block",
                             margin: " 0 40px"
                             
-                        }}/>
+                        }} onClick={(e) => {
+                            e.preventDefault();
+                            window.open(`https://instagram.com/${userDetails.instagram}`)
+                   }}/>
 
                         </Tooltip>
 
@@ -142,7 +147,14 @@ export default function Vescovered() {
                             display: "inline-block",
                             margin: " 0 40px"
 
-                        }}/> 
+                        }} onClick={ (e) => {
+                            e.preventDefault();
+
+
+                            window.open(`https://twitter.com/${userDetails.twitter}`
+            
+                            )}
+                            }/> 
                         </Tooltip>
                         
                     </th>
@@ -151,7 +163,7 @@ export default function Vescovered() {
                     <th scope="row"colSpan={2}><h3>{address}</h3></th>
                     </tr>
                 </tbody>
-                <tfoot>
+                <tfoot className="blank-footer">
                     <tr>
                     <th scope="row" colSpan={2}></th>
                     </tr>

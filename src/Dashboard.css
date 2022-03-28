@@ -228,19 +228,13 @@ tbody tr:nth-child(1) {
 
 }
 
-.view-user-table > thead th:nth-child(1), tbody tr:nth-child(4), tfoot {
+.view-user-table > thead th:nth-child(1) , .blank-item, .blank-footer{
 
         background-color: #3797A4;
 
-
-
 }
 
-table > thead th:nth-child(1), tbody tr:nth-child(4), tfoot {
 
-    background : rgb(61, 61, 61)
-
-}
 
 .vescovered-row-item {
 

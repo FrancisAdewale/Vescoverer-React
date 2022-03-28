@@ -152,6 +152,12 @@ export default function Dashboard() {
       const addBadgeCount = () => {
           setBadgeCount(prev => prev + 1)
       }
+
+      const resetBadge = () => {
+
+        setBadgeCount(0)
+
+      }
       
 
 
@@ -209,7 +215,9 @@ export default function Dashboard() {
                         />
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <Vescovered />
+                        <Vescovered
+                        updateBadge={resetBadge}
+                        />
                     </TabPanel>
                     <TabPanel value={value} index={4}>
                         Recipes
