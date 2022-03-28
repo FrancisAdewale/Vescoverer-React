@@ -122,10 +122,10 @@ export default function Account(props) {
                         props.secondName !== undefined) ? `${props.firstName} ${props.secondName}` : "" }</h3>  </th>
                     </tr>
                     <tr>
-                    <th scope="row"colSpan={2}><h3>{props.age}</h3></th>
+                    <th scope="row"colSpan={2}><h3>{props.age !== undefined ? props.age : ""}</h3></th>
                     </tr>
                     <tr>
-                    <th scope="row"colSpan={2}> <h3>{`Vegan For: ${props.veganFor}`}</h3> </th>
+                    <th scope="row"colSpan={2}> <h3>{`Vegan For: ${props.veganFor !== undefined ? props.veganFor : ""}`}</h3> </th>
                     </tr>
                     <tr>
                     <th scope="row"colSpan={2}></th>
