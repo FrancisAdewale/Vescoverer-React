@@ -6,6 +6,10 @@ import Tooltip from '@mui/material/Tooltip';
 import AccInstaIcon from "../imgs/account-instagram.png"
 import AccTwitterIcon from "../imgs/account-twitter.png"
 import Geocode from "react-geocode";
+import { SwipeableList, SwipeableListItem } from '@sandstreamdev/react-swipeable-list';
+import '@sandstreamdev/react-swipeable-list/dist/styles.css';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 
 export default function Vescovered(props) {
@@ -14,12 +18,14 @@ export default function Vescovered(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [userDetails, setUserDetails] = useState({})
     const [address, setAddress] = useState("")
+    const [itemDeleted, setItemDeleted] = useState(false)
 
 
     const lng = userDetails.longitude
     const lat = userDetails.latitude
    
     const user = auth.currentUser.email
+
 
     Geocode.setApiKey("AIzaSyA3RqIQZzvJfUWxsicl_YAalCTqI0zgp7I");
     Geocode.setLanguage("en");
@@ -59,11 +65,10 @@ export default function Vescovered(props) {
             console.log(error)
         })
 
-    }, [])
+    }, [itemDeleted])
 
   const viewUser = (id) => {
 
-    console.log(id)
 
           db.collection("users").doc(id).get()
         .then(doc => {
@@ -85,20 +90,55 @@ export default function Vescovered(props) {
         setIsOpen(!isOpen);
       }
 
+      const removeUser = (u) => {
+
+        db.collection("users").doc(user).collection("vescovered").doc(u.email).delete()
+        setItemDeleted(!itemDeleted)
+
+      }
+
 
     return (
-        <>
+
+        
+        <div className="scroll-container">
         {
             vescoveredUsers.map(e => {
-                return <VescoveredUser
-                key={e.email}
-                image={e.image}
-                firstName={e.firstName}
-                veganFor={e.veganSince}
-                age={e.age}
-                handleClick={viewUser}
-                id={e.email}
-                />
+                return <SwipeableList >
+                            <SwipeableListItem
+                            swipeLeft={{
+                            content: <div style={{
+                                backgroundColor: "red",
+                                width : "100%",
+                                height : "100%",
+                                right: "0"
+                            }}><DeleteIcon style={{
+                                float: "right",
+                                marginTop : "120px",
+                                width : "60px",
+                                height: "60px",
+                                marginRight: "40px"
+                            }}/>
+                            </div>,
+                            action: () => removeUser(e)
+                            }}
+                            
+                            onSwipeProgress={progress => console.info(`Swipe progress: ${progress}%`)}
+                            
+                            >
+                                 <VescoveredUser
+                                    key={e.email}
+                                    image={e.image}
+                                    firstName={e.firstName}
+                                    veganFor={e.veganSince}
+                                    age={e.age}
+                                    handleClick={viewUser}
+                                    id={e.email}
+                                    />
+                            </SwipeableListItem>
+                        </SwipeableList>
+                
+               
             })
         }
 
@@ -174,7 +214,7 @@ export default function Vescovered(props) {
     />} 
         
         
-        </>
+        </div>
 
         
 

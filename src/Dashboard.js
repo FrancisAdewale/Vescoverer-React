@@ -18,6 +18,7 @@ import {auth , provider, db} from './firebase.js';
 import Geocode from "react-geocode";
 import Badge from '@mui/material/Badge';
 import Vescovered from "./componenets/Vescovered"
+import Recipes from "./componenets/Recipes"
 
 
 
@@ -220,7 +221,7 @@ export default function Dashboard() {
                         />
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        Recipes
+                        <Recipes />
                     </TabPanel>
 
                 </div>

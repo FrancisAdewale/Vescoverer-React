@@ -7,7 +7,7 @@ export default function VescoveredUser(props) {
       
     
     return (
-        <div className="vescovered-row-item" onClick={() => handleClick(id)}>
+        <div className="vescovered-row-item"onClick={() => handleClick(id)}>
             <img src={image} />
             <div className="display-text">
             <h3>{firstName}</h3>

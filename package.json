@@ -13,6 +13,7 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
     "@react-navigation/bottom-tabs": "^6.2.0",
+    "@sandstreamdev/react-swipeable-list": "^1.0.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
