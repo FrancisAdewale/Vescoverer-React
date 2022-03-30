@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useRef} from "react"
 import {auth , provider, db} from '../firebase.js';
 import upload from "../imgs/upload.png"
 
@@ -6,7 +6,7 @@ import upload from "../imgs/upload.png"
 export default function Upload(props) {
 
     const [user, setUser] = useState(auth.currentUser.email)
-    const hiddenFileInput = React.useRef(null);
+    const hiddenFileInput = useRef(null);
 
 
     const handleUploadClick = event => {

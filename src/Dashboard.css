@@ -277,6 +277,14 @@ tbody tr:nth-child(1) {
     overflow-y: scroll;
 }
 
+.account-scroll-container {
+    overflow-y: scroll;
+    max-height: 450px;
+
+
+
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 100%;
@@ -319,7 +327,30 @@ tbody tr:nth-child(1) {
     
 }
 
+.verify-container {
+
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+       
+}
+
+.verify-container > .unverified {
+    animation: shake 1s;
+    animation-duration: 3s;
+    border-radius: 20px;
+   
+}
+
   
+.verify-container > h3 {
+    font-family: sans-serif;
+    color: #3797A4;
+    margin-top: 20px;
+    font-style: italic
+    
+   
+}
   
   
   

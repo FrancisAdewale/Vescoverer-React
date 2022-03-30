@@ -8,14 +8,19 @@ import Socials from "./componenets/Socials"
 import "./Register.css"
 import {auth , provider, db} from './firebase.js';
 import { Navigate, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 
 export default function Register() {
 
 
+
     const navigate = useNavigate()
 
     const user = auth.currentUser.email
+    const [veganForShake, setVeganForShake] = useState(false);
+
+
 
 
 
@@ -35,7 +40,7 @@ export default function Register() {
 
     const [sectionCount, setSectionCount] = useState(0)
 
-    const changeRegState = (e) => {
+    const changeRegState = (e, val) => {
 
         e.preventDefault();
         const { id } = e.target
@@ -43,18 +48,23 @@ export default function Register() {
         console.log(id)
 
         if(id === "vegan") {
-            setSectionCount(sectionCount => sectionCount + 1)
 
-            let temp_state = [...sections]
+            
+                setSectionCount(sectionCount => sectionCount + 1)
 
-            let temp_element = { ...temp_state[0] }
-    
-            temp_element.veganForCompleted = !temp_state[0].veganForCompleted
+                let temp_state = [...sections]
 
-            temp_state[0] = temp_element
+                let temp_element = { ...temp_state[0] }
+        
+                temp_element.veganForCompleted = !temp_state[0].veganForCompleted
 
-            setSections(temp_state)
-        }
+                temp_state[0] = temp_element
+
+                setSections(temp_state)
+
+            
+            
+        } 
         
         if(id === "name") {
 
@@ -121,7 +131,9 @@ export default function Register() {
             setSections(temp_state)
 
             db.collection("users").doc(user).set({
-                completedRegistration : true
+                completedRegistration : true,
+                isVerified: false,
+                uploadedVerifyImage: false
             }, { merge: true })
             navigate("/dashboard")
         }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef,} from "react"
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -14,17 +14,20 @@ import PropTypes from 'prop-types';
 import "./Dashboard.css"
 import Account from "./componenets/Account"
 import Vescover from "./componenets/Vescover"
-import {auth , provider, db} from './firebase.js';
+import {auth , provider, db, storage} from './firebase.js';
 import Geocode from "react-geocode";
 import Badge from '@mui/material/Badge';
 import Vescovered from "./componenets/Vescovered"
 import Recipes from "./componenets/Recipes"
+import Verify from "./componenets/Verify"
 
 
 
 
 
 export default function Dashboard() {
+
+    const storageRef =  storage.ref()
 
 
     const [user, setUser] = useState(auth.currentUser.email)
@@ -33,11 +36,13 @@ export default function Dashboard() {
 
     const [hasClickedBadge, setHasClickedBadge] = useState(false)
 
-    
+    const childRef = useRef(null);
 
     const [value, setValue] = useState(0);
     const [address, setAddress] = useState("")
     const [update, setUpdate] = useState(false)
+    const [result, setResult] = useState(null) 
+    const [isVerified, setIsVerfied] = useState(null)
 
 
 
@@ -78,6 +83,20 @@ export default function Dashboard() {
         })
 
     }, [update])
+
+    
+        db.collection("users").doc(user).get()
+        .then(doc => {
+            if (doc.exists) {
+               setIsVerfied(doc.data().isVerified)
+               setResult(doc.data().uploadedVerifyImage)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+   
 
     useEffect(() => {
 
@@ -159,6 +178,54 @@ export default function Dashboard() {
         setBadgeCount(0)
 
       }
+
+      const useStyles = makeStyles(theme => ({
+        customRoot : {
+            color: '#272829'
+        },
+        customTabIndicator: {
+            backgroundColor: '#3797A4'
+
+        }
+      }));
+
+    
+      const classes = useStyles();
+
+        const uploadClick = event => {
+
+        event.preventDefault()
+        childRef.current.click();
+    }
+
+    const verifyImage = event => {
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+
+               const imageRef = storageRef.child(`\\${user}`).child("spoonpic.jpg")
+               const file = e.target.result
+               imageRef.put(file).then(() => {
+                   console.log("image added")
+                   setResult(prevResult => true)
+
+                   db.collection("users").doc(user).set({
+                    uploadedVerifyImage: true
+            
+                    }, { merge: true })
+
+               })
+               .catch(error => console.log(error))
+
+            };
+            reader.readAsDataURL(event.target.files[0]);
+          }
+
+     
+
+       
+    }
+
       
 
 
@@ -170,10 +237,15 @@ export default function Dashboard() {
                     <Paper square>
                     <Tabs
                     value={value}
-                    indicatorColor="primary"
-                    textColor="primary"
+                    indicatorColor="inherit"
+                    textColor="inherit"
                     onChange={handleChange}
                     aria-label="disabled tabs example"
+                    classes={{
+                        root: classes.customRoot,
+                        indicator: classes.customTabIndicator
+                    }}
+            
                     >
                     <Tab label="Account" icon={<AccountBoxOutlinedIcon /> } {...a11yProps(0)} />
                     <Tab label="Verify" icon={<DoneOutlineOutlinedIcon />} {...a11yProps(1)} />
@@ -208,7 +280,13 @@ export default function Dashboard() {
                         />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        Verify
+                        <Verify 
+                        handleUploadClick={uploadClick}
+                        handleImageUpload={verifyImage}
+                        uploaded={result}
+                        verified={isVerified}
+                        forwardedRef={childRef}
+                        />
                     </TabPanel>
                     <TabPanel value={value} index={2}>
                         <Vescover 

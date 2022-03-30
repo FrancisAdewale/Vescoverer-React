@@ -91,6 +91,7 @@ export default function Account(props) {
 
     const deleteAcc = () => {
         db.collection("users").doc(user).delete().then(() => {
+            
             console.log("Document successfully deleted!");
             navigate("/login")
         }).catch((error) => {
@@ -106,6 +107,7 @@ export default function Account(props) {
 
 
     return (
+        <div className="account-scroll-container">
             <table>
                 <thead>
                     <tr>
@@ -189,6 +191,7 @@ export default function Account(props) {
 
     
             </table>
+            </div>
 
             
     )
