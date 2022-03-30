@@ -95,6 +95,7 @@ export default function Dashboard() {
         .catch(error => {
             console.log(error)
         })
+        
 
    
 
@@ -276,13 +277,14 @@ export default function Dashboard() {
                         twitter={account.twitter}
                         address={address}
                         updateParent={updateMyUser}
+                        verified={isVerified}
                         
                         />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         <Verify 
                         handleUploadClick={uploadClick}
-                        handleImageUpload={verifyImage}
+                        handleVerifyImage={verifyImage}
                         uploaded={result}
                         verified={isVerified}
                         forwardedRef={childRef}

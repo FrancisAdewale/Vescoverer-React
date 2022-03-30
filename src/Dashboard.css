@@ -119,8 +119,17 @@ tbody tr:nth-child(1) {
       width: 90px;
       height: 90px;
       border-radius: 50px;
-      border: 5px solid #3797A4;
       
+  }
+
+  .account-verified {
+    width: 90px;
+    height: 90px;
+    border-radius: 50px;
+    border: 5px solid #3797A4;
+
+    
+
   }
   
   
@@ -351,7 +360,8 @@ tbody tr:nth-child(1) {
     
    
 }
-  
+
+
   
   
   

@@ -120,7 +120,11 @@ export default function Account(props) {
                 </thead>
                 <tbody>
                     <tr>
-                    <th scope="row" colSpan={2}><img className="account--avatar" src={props.imgPath}/><h3 id="acc-full-name">{(props.firstName !== undefined &&
+                    <th scope="row" colSpan={2}>
+                        
+                        <img className={props.verified ? "account-verified" : "account--avatar"} src={props.imgPath}/>
+                
+                        <h3 id="acc-full-name">{(props.firstName !== undefined &&
                         props.secondName !== undefined) ? `${props.firstName} ${props.secondName}` : "" }</h3>  </th>
                     </tr>
                     <tr>
