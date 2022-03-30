@@ -2,12 +2,10 @@ import React from "react"
 import {auth , provider, db} from '../firebase.js';
 import twitter from "../imgs/twitter.png"
 import instagram from "../imgs/instagram-256.png"
-import { Navigate, useNavigate } from "react-router-dom";
 
 
 export default function Socials(props) {
 
-    const navigate = useNavigate()
 
     const user = auth.currentUser.email
 

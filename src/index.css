@@ -114,6 +114,27 @@ input:checked + .slider:before {
   align-items: center;
 }
 
+.white-blob {
+  float: right;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 380px;
+  height: 380px;
+  margin-right: -150px;
+  margin-top: -150px;
+}
+
+.brand-blob {
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  margin-left: -150px;
+ 
+}
+
 
 
 
@@ -153,6 +174,8 @@ input:checked + .slider:before {
   border-radius: 25px;
   animation: shake 1s infinite;
 }
+
+
 @keyframes shake {
 0%  { transform: translate(2px, 1px)   rotate(0deg);  }
 10% { transform: translate(-1px, -2px) rotate(-2deg); }

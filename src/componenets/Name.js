@@ -21,8 +21,16 @@ export default function Name(props) {
                 setFirstName(doc.data().firstName)
                 setSecondName(doc.data().secondName)
 
-                firstEle.value = firstName
-                secondEle.value = secondName
+                if(firstName === undefined || secondName === undefined) {
+                    firstEle.value = ""
+                    secondEle.value = ""
+                } else {
+                    firstEle.value = firstName
+                    secondEle.value = secondName
+
+                }
+
+               
             }
         })
         .catch(error => {

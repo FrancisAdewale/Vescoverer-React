@@ -9,14 +9,17 @@ import logo from "../imgs/nav-logo.png"
 export default function Login() {
 
     const navigate = useNavigate()
-    const currentUserEmail = auth.currentUser.email
+    const [user, setUser] = useState("")
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
+    const [completedReg, setCompletedReg] = useState(false)
+    
 
 
-
+    
     useEffect(() => {
         getCoords()
+      
 
     }, [])
 
@@ -32,40 +35,64 @@ export default function Login() {
 
 
         const signin = () => {
-           auth.signInWithPopup(provider)
-           .then((result) => {
 
-            var credential = result.credential
+                auth.signInWithPopup(provider)
+                .then((result) => {
+                    
 
-            var name = result.user.displayName
+                    db.collection("users").doc(result.user.email).get()
+                    .then(doc => {
+                        if (doc.exists) {
 
-            const splitName = name.split(" ")
-            const firstName = splitName[0]
-            const secondName = splitName[1]
+                            if(doc.data().completedRegistration) {
+                                navigate("/dashboard")
+                            } else {
 
-        db.collection("users").doc(currentUserEmail).set({
-            email : currentUserEmail,
-            longitude : longitude,
-            latitude : latitude,
-            firstName : firstName,
-            secondName : secondName,
-            completedRegistration: false
+                                var credential = result.credential
+     
+                                var name = result.user.displayName
+               
+                                setUser(result.user.email)
+               
+                                   const splitName = name.split(" ")
+                                   const firstName = splitName[0]
+                                   const secondName = splitName[1]
+                       
+                               db.collection("users").doc(result.user.email).set({
+                                   email : result.user.email,
+                                   longitude : longitude,
+                                   latitude : latitude,
+                                   firstName : firstName,
+                                   secondName : secondName,
+                                   completedRegistration: false
+                       
+                               })
+                               .catch(error => {
+                                   console.log(error)
+                               })
+                       
+                                   navigate("/register")
 
-        })
-        .then(() => {
-        })
-        .catch(error => {
-            console.log(error)
-        })
+                            }
+                            
+                            
+                        } else {
+                            navigate("/register")
 
-        //conditon here to render register parent or dashboard parent.
-            navigate("/register")
-        }).catch(alert)
-            
+                        }
+                    })
+                    
+                    .catch(error => {
+                        console.log(error)
+                    })
+
+                
+
+             }).catch(alert)
+
+
         }
     
-
-
     return (
             <div className='login-outer'>
                 <nav>

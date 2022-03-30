@@ -10,7 +10,7 @@ export default function Age(props) {
 
 const user = auth.currentUser.email
 
-const [selectedDate, setSelectedDate] = useState(new Date());
+const [selectedDate, setSelectedDate] = useState(new Date(2000, 10, 10));
 const [age, setAge] = useState(0)
 
   const handleDateChange = (date) => {

@@ -1,19 +1,22 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore'
+import 'firebase/compat/storage'
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA3RqIQZzvJfUWxsicl_YAalCTqI0zgp7I",
-  authDomain: "vescoverer-react.firebaseapp.com",
-  projectId: "vescoverer-react",
-  storageBucket: "vescoverer-react.appspot.com",
-  messagingSenderId: "622349327567",
-  appId: "1:622349327567:web:d67440527a1c96f4e86bba"
+  apiKey: process.env.REACT_APP_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var db = firebase.firestore()
+var storage = firebase.storage()
 var provider = new firebase.auth.GoogleAuthProvider(); 
 
-export {auth , provider, db};
+export {auth , provider, db, storage};
