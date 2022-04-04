@@ -40,16 +40,32 @@ export default function Register() {
 
     const [sectionCount, setSectionCount] = useState(0)
 
-    const changeRegState = (e, val) => {
+    const changeRegState = (e) => {
 
         e.preventDefault();
         const { id } = e.target
 
         console.log(id)
-
+        
         if(id === "vegan") {
 
-            
+            db.collection("users").doc(user).get()
+        .then(doc => {
+            if (doc.exists) {
+
+                if(doc.data().veganFor === null) {
+
+                }
+                
+
+
+               
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
                 setSectionCount(sectionCount => sectionCount + 1)
 
                 let temp_state = [...sections]
@@ -61,9 +77,7 @@ export default function Register() {
                 temp_state[0] = temp_element
 
                 setSections(temp_state)
-
-            
-            
+          
         } 
         
         if(id === "name") {

@@ -5,9 +5,16 @@ import WhiteBlob from "./imgs/white-blob.png"
 import BrandBlob from "./imgs/brand-blob.png"
 import { Navigate, useNavigate } from 'react-router-dom';
 import Login from "./componenets/Login"
+import { UseEffectScroll } from 'react-use-smooth-scroll'
+import AppScreenshot from './componenets/AppScreenshot';
+import 'react-use-smooth-scroll/dist/index.css'
+
+
+
 
 
 function App() {
+  
 
   const navigate = useNavigate()
 
@@ -45,23 +52,31 @@ function App() {
 
   }
 
+
+
   return (
     <div className='outer'>
-       
       <div className='middle'>
-      <img src={WhiteBlob} className="white-blob" />
-      <img src={BrandBlob} className="brand-blob" />
-       
         <div className='inner'>
 
+            <UseEffectScroll>
+              <section style={{marginBottom : "300px"}}>
               <Home 
-            callback={isVegan}
-            handleChange={checkIfVegan}
-            shake={shake}
-            isVegan={vegan}
-             /> 
-          
- 
+                callback={isVegan}
+                handleChange={checkIfVegan}
+                shake={shake}
+                isVegan={vegan}
+                /> 
+              </section>
+              <section style={
+                {
+                  marginBottom : "30px"
+                }
+              }>
+              <AppScreenshot />
+              </section>
+        </UseEffectScroll>
+
         </div>
       </div>
 

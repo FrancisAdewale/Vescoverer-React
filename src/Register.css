@@ -66,6 +66,12 @@
 
     background: #ececec;
   }
+
+  .select-invalid {
+
+    background: red;
+  }
+
   
   .label {
     position: relative;
@@ -111,6 +117,15 @@
       border: hidden;
 
   }
+
+  .form--fullname > input:invalid:required{
+    border: 5px solid red;
+
+
+}
+
+
+
 
   .reg-instagram {
     
