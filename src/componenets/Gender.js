@@ -1,6 +1,7 @@
 import React from "react"
 import {auth , provider, db} from '../firebase.js';
 
+
 export default function Gender(props) {
 
     const user = auth.currentUser.email

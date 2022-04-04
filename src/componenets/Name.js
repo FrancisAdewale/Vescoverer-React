@@ -7,6 +7,10 @@ export default function Name(props) {
 
     const [firstName, setFirstName] = useState("")
     const [secondName, setSecondName] = useState("")
+    
+
+
+
 
 
     const user = auth.currentUser.email
@@ -44,7 +48,11 @@ export default function Name(props) {
   
 
 
-   const handleFirstName = () => {
+   const handleFirstName = (e) => {
+
+    const {required, value} = e.target
+
+   
 
     db.collection("users").doc(user).set({
         firstName : firstEle.value
@@ -52,7 +60,13 @@ export default function Name(props) {
         }, { merge: true })
    }
 
-   const handleSecondName = () => {
+   const handleSecondName = (e) => {
+
+    const {required, value} = e.target
+
+
+
+
     db.collection("users").doc(user).set({
         secondName : secondEle.value
 
@@ -64,8 +78,8 @@ export default function Name(props) {
 
     return (
         <form className="form--fullname">
-            <input id="firstName" type="text" placeholder="First Name" onChange={handleFirstName} />
-            <input id="secondName" type="text" placeholder="Second Name" onChange={handleSecondName} />
+            <input id="firstName" type="text" placeholder="First Name" onChange={handleFirstName}  />
+            <input id="secondName" type="text" placeholder="Second Name" onChange={handleSecondName}  />
             <button className="name-done-btn" id="name" onClick={(e) => props.callback(e)}>Next</button>
 
         </form>

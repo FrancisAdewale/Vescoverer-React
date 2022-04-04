@@ -190,6 +190,7 @@ tbody tr:nth-child(1) {
     margin: 10px;
     border: none;
     font-family: sans-serif;
+    border-radius: 20px;
  
 }
 

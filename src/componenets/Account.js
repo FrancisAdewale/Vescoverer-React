@@ -8,6 +8,8 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import EditPopUp from "./EditPopUp";
 import {auth , provider, db} from '../firebase.js';
 import { Navigate, useNavigate } from "react-router-dom";
+import PlaceholderImage from "../imgs/placeholder1.png"
+import { borderRadius, fontFamily } from "@mui/system";
 
 
 export default function Account(props) {
@@ -122,7 +124,7 @@ export default function Account(props) {
                     <tr>
                     <th scope="row" colSpan={2}>
                         
-                        <img className={props.verified ? "account-verified" : "account--avatar"} src={props.imgPath}/>
+                        <img className={props.verified ? "account-verified" : "account--avatar"} src={props.imgPath} placeholder={PlaceholderImage}/>
                 
                         <h3 id="acc-full-name">{(props.firstName !== undefined &&
                         props.secondName !== undefined) ? `${props.firstName} ${props.secondName}` : "" }</h3>  </th>
@@ -166,28 +168,54 @@ export default function Account(props) {
                 </tbody>
                 <tfoot>
                     <tr>
-                    <th scope="row" colSpan={2}><button style={{backgroundColor: "#3797A4"}} onClick={logout}>Sign Out</button> 
-                    <button style={{backgroundColor : "red", marginLeft : "16px"}} onClick={deleteAcc}>Delete Account</button></th>
+                    <th scope="row" colSpan={2}><button style={{backgroundColor: "#3797A4" , color : "white"}} onClick={logout}>Sign Out</button> 
+                    <button style={{backgroundColor : "red", marginLeft : "16px", color: "white"}} onClick={deleteAcc}>Delete Account</button></th>
                     </tr>
                 </tfoot>
                 {isOpen && <EditPopUp
       content={<>
         <form className="form--popup">
             <legend><h3>Edit Account</h3></legend>
-            <input type="text" id="firstName" placeholder={props.firstName} onChange={handleChange}/>
+            <label for="first"> First name:</label>
+            <input type="text" id="firstName" name="first" placeholder={props.firstName} onChange={handleChange}/>
+            <label for="second"> Second name:</label>
             <input type="text" id="secondName" placeholder={props.secondName }  onChange={handleChange}/>
+            <label for="instagram"> Instagram</label>
             <input type="text" id="instagram"placeholder={props.instagram}onChange={handleChange}/>
+            <label for="twitter"> Twitter</label>
             <input type="text" id="twitter"placeholder={props.twitter} onChange={handleChange}/>
-            <button className="home-done-btn" onClick={handleUploadClick}>New Avatar</button>
+            <button className="home-done-btn" onClick={handleUploadClick} style={
+                {
+                    backgroundColor : "#272829",
+                    height : "70px"
+                }
+            }>New Avatar</button>
             <input type="file" id="image" style={{
                 display : "none"
             }} ref={hiddenFileInput}
             onChangeCapture={handleFileChange}
             />
-            <button 
+          
+        </form>
+
+        <hr style={{
+                color: "#272829",
+                width : "100%",
+                border: "solid",
+
+            }}/>
+            <button style={{
+                float: "right",
+                width : "100px",
+                height: "50px",
+                backgroundColor : "grey",
+                borderRadius : "20px",
+                border: "none",
+                fontFamily : "sans-serif"
+            
+        }}
             onClick={(e) => props.updateParent(e, editFirstname, editSecondName, editTwitter, editInstagram, newImage)}>Done</button>
 
-        </form>
         
       </>}
       handleClose={togglePopup}

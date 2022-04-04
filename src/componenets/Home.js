@@ -12,7 +12,7 @@ export default function Home(props) {
   
 
     return (
-        <div>
+        <div style={{marginTop : "20px"}}>
             <img className={props.shake ? "shake" : "home-logo" } src={logo} alt="logo"/>
             <h3 className="home-question">Are You Vegan?</h3>
             <label className="switch">
