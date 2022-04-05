@@ -11,60 +11,6 @@ export default function Verify(props) {
     const [result, setResult] = useState(null) 
     const [isVerified, setIsVerfied] = useState(null)
 
-
-    // const storageRef =  storage.ref()
-
-    // useEffect(() => {
-    //     db.collection("users").doc(user).get()
-    //     .then(doc => {
-    //         if (doc.exists) {
-    //            setIsVerfied(doc.data().isVerified)
-    //            setResult(doc.data().uploadedVerifyImage)
-    //         }
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //     })
-
-    // }, [result, isVerified])
-
-  
-
-
-
-    // const handleUploadClick = event => {
-    //     event.preventDefault()
-    //     hiddenFileInput.current.click();
-    // }
-
-    // const handleVerifyImage = event => {
-    //     if (event.target.files && event.target.files[0]) {
-    //         let reader = new FileReader();
-    //         reader.onload = (e) => {
-
-    //            const imageRef = storageRef.child(`\\${user}`).child("spoonpic.jpg")
-    //            const file = e.target.result
-    //            imageRef.put(file).then(() => {
-    //                console.log("image added")
-    //                setResult(prevResult => true)
-
-    //                db.collection("users").doc(user).set({
-    //                 uploadedVerifyImage: true
-            
-    //                 }, { merge: true })
-
-    //            })
-    //            .catch(error => console.log(error))
-
-    //         };
-    //         reader.readAsDataURL(event.target.files[0]);
-    //       }
-
-     
-
-       
-    // }
-
     return (
         <div className="verify-container">
 
@@ -91,8 +37,8 @@ export default function Verify(props) {
             onChangeCapture={(e) => props.handleVerifyImage(e)}
             />
             {
-                props.verified ?
-
+                props.verified 
+                ?
                 <DoneOutlineIcon 
                 style={{
                     width: "70px",
@@ -102,12 +48,8 @@ export default function Verify(props) {
                     color : "#3797A4"
                 }}
                 />
-
                 :
-
                 <h3>{props.uploaded ? "Reviewing....check back later" : "Upload a spoon pic"}</h3>
-
-
             }
             
         </div>

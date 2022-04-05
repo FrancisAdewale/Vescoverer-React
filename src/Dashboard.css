@@ -44,6 +44,11 @@
   
 }
 
+.account-scroll-container  h3 {
+  font-family: sans-serif;
+  font-weight: 200;
+}
+
 
 thead th:nth-child(1) {
   width: 30%;
@@ -149,7 +154,7 @@ tbody tr:nth-child(1) {
     height: auto;
     max-height: 70vh;
     margin-top: calc(100vh - 85vh - 20px);
-    background: #3797A4;
+    background: white;
     border-radius: 5px;
     padding: 20px;
     border: 1px solid #999;
@@ -186,7 +191,7 @@ tbody tr:nth-child(1) {
     text-align: center;
     padding: 0px 10px;
     font-size: 15px;
-    background: gray;
+    background: #3797A4;
     margin: 10px;
     border: none;
     font-family: sans-serif;

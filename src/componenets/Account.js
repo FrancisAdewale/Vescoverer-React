@@ -1,8 +1,6 @@
-import { Margin, PropaneSharp } from "@mui/icons-material"
 import React, {useEffect, useState, useReducer} from "react"
 import AccInstaIcon from "../imgs/account-instagram.png"
 import AccTwitterIcon from "../imgs/account-twitter.png"
-import Geocode from "react-geocode";
 import Tooltip from '@mui/material/Tooltip';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import EditPopUp from "./EditPopUp";
@@ -130,7 +128,7 @@ export default function Account(props) {
                         props.secondName !== undefined) ? `${props.firstName} ${props.secondName}` : "" }</h3>  </th>
                     </tr>
                     <tr>
-                    <th scope="row"colSpan={2}><h3>{props.age !== undefined ? props.age : ""}</h3></th>
+                    <th scope="row"colSpan={2}><h3>{props.age !== undefined ? `${props.age} Years Old` : ""}</h3></th>
                     </tr>
                     <tr>
                     <th scope="row"colSpan={2}> <h3>{`Vegan For: ${props.veganFor !== undefined ? props.veganFor : ""}`}</h3> </th>
@@ -175,7 +173,11 @@ export default function Account(props) {
                 {isOpen && <EditPopUp
       content={<>
         <form className="form--popup">
-            <legend><h3>Edit Account</h3></legend>
+            <legend><h3 style={{
+                fontWeight : "200",
+                fontFamily : "sans-serif",
+                
+            }}>Edit Account</h3></legend>
             <label for="first"> First name:</label>
             <input type="text" id="firstName" name="first" placeholder={props.firstName} onChange={handleChange}/>
             <label for="second"> Second name:</label>
@@ -186,8 +188,9 @@ export default function Account(props) {
             <input type="text" id="twitter"placeholder={props.twitter} onChange={handleChange}/>
             <button className="home-done-btn" onClick={handleUploadClick} style={
                 {
-                    backgroundColor : "#272829",
-                    height : "70px"
+                    backgroundColor : "#3797A4",
+                    height : "70px",
+                    color : "black"
                 }
             }>New Avatar</button>
             <input type="file" id="image" style={{
@@ -208,10 +211,11 @@ export default function Account(props) {
                 float: "right",
                 width : "100px",
                 height: "50px",
-                backgroundColor : "grey",
+                backgroundColor : "#3797A4",
                 borderRadius : "20px",
                 border: "none",
-                fontFamily : "sans-serif"
+                fontFamily : "sans-serif",
+                fontSize : "20px"
             
         }}
             onClick={(e) => props.updateParent(e, editFirstname, editSecondName, editTwitter, editInstagram, newImage)}>Done</button>

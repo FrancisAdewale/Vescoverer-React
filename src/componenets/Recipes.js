@@ -12,12 +12,8 @@ export default function Recipes() {
     }, [])
 
     const viewRecipe = (link) => {
-
         window.open(link)
-
     }
-
-
     return (
         <div className="recipe-horizontal-scroll">
             {
@@ -28,16 +24,11 @@ export default function Recipes() {
                     time={item.readyInMinutes}
                     rating={item.healthScore}
                     handleClick={viewRecipe}
-                    link={item.spoonacularSourceUrl}
-
+                    link={item.spoonacularSourceUrl
+                    }
                     />
                 })
             }
-
         </div>
-        
-
-    )
-
-   
+    )  
 }

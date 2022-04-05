@@ -1,47 +1,26 @@
 import React, { useState } from "react"
 import {auth , provider, db} from '../firebase.js';
-import { useForm } from "react-hook-form";
-
-
- 
 export default function VeganFor(props) {
 
     const [val, setVal] = useState("<5 Years")
     const [required, setRequired] = useState(false)
-
-
-    
-
     const user = auth.currentUser.email
 
     const handleChange = (e) => {
-
-
         const h3Eele = document.getElementById("timeframe")
-
         const {value, required} = e.target
         setVal(value)
         setRequired(required)
 
         h3Eele.textContent = value
-
-       
-            db.collection("users").doc(user).set({
+        db.collection("users").doc(user).set({
                 veganFor : value
-            }, { merge: true })
-        
-
-        
+            }, { merge: true })  
     }
 
     return (
-
-        ///MAYBE USER @MUI SLIDER!!!!!!!
-        
         <form>
- 
         <div className="select-box">
-          
           <label for="select-box1" className={"label select-box1" }><span className="label-desc" id="select">Choose Your Timeframe</span> </label>
           <select id="select-box1" className="select" onChange={handleChange} required={true} value={val} >
             <option value="<20 Years" > Less than 20 Years</option>
@@ -50,13 +29,9 @@ export default function VeganFor(props) {
             <option value="<2 Years"> Less than 2 Years</option>
             <option value="<6 Months">Less than 6 Months</option>
           </select>
-
           <h3 id="timeframe"></h3>
-
           <button id="vegan" className="vegan-done-btn" onClick={(e) => props.callback(e)}>Next</button>
-          
         </div>
-         
       </form>  
     )
 }

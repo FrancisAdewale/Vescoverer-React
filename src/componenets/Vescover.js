@@ -4,9 +4,6 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 
 
-
-
-
 export default function Vescover(props) {
 
     const [userList, setUserList] =  useState([])
@@ -84,14 +81,9 @@ export default function Vescover(props) {
             console.log(error)
             })
         })
-
-
         .catch(error => {
             console.log(error)
         })
-
-       
-
     }
 
   
@@ -101,7 +93,8 @@ export default function Vescover(props) {
     return (
         <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyCwE_g8rAeCVTtWv_n1wgOsiU3QHHjppHQ"}}
+          bootstrapURLKeys={{ key: "AIzaSyCwE_g8rAeCVTtWv_n1wgOsiU3QHHjppHQ", language: 'en',
+          region: 'en',}}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           yesIWantToUseGoogleMapApiInternals={true}

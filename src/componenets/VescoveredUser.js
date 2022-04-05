@@ -11,7 +11,7 @@ export default function VescoveredUser(props) {
             <img src={image} />
             <div className="display-text">
             <h3>{firstName}</h3>
-            <h5>{age}</h5>
+            <h5>{`${age} Years Old`}</h5>
             <h4>{`Vegan for: ${veganFor}`}</h4>
             </div>
             

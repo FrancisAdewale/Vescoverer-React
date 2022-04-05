@@ -20,26 +20,22 @@ export default function Vescovered(props) {
     const [address, setAddress] = useState("")
     const [itemDeleted, setItemDeleted] = useState(false)
 
-
     const lng = userDetails.longitude
     const lat = userDetails.latitude
-   
     const user = auth.currentUser.email
-
 
     Geocode.setApiKey("AIzaSyA3RqIQZzvJfUWxsicl_YAalCTqI0zgp7I");
     Geocode.setLanguage("en");
     Geocode.setRegion("en");
-    Geocode.setLocationType("APPROXIMATE");
+    Geocode.setLocationType("GEOMETRIC_CENTER");
     Geocode.enableDebug();
 
     useEffect(() => {
 
         props.updateBadge()
-
         Geocode.fromLatLng(lat, lng).then(
             (response) => {
-                const address = response.results[2].formatted_address;
+                const address = response.results[0].formatted_address;
                 setAddress(address)
             },
             (error) => {
@@ -75,14 +71,11 @@ export default function Vescovered(props) {
             if (doc.exists) {
                setUserDetails(doc.data())
                setIsOpen(!isOpen)
-
             }
         })
         .catch(error => {
             console.log(error)
         })
-
-
       }
 
       
@@ -91,18 +84,22 @@ export default function Vescovered(props) {
       }
 
       const removeUser = (u) => {
-
         db.collection("users").doc(user).collection("vescovered").doc(u.email).delete()
         setItemDeleted(!itemDeleted)
-
       }
 
-
     return (
-
-        
         <div className="scroll-container">
         {
+            vescoveredUsers.length === 0 
+            ?
+            <h1 style={{
+                textAlign : "center",
+                fontWeight : "200",
+                fontFamily : "sans-serif",
+                color : "#3797A4"
+            }}>Vescover users and view them here</h1>
+            :
             vescoveredUsers.map(e => {
                 return <SwipeableList >
                             <SwipeableListItem
@@ -124,7 +121,6 @@ export default function Vescovered(props) {
                             }}
                             
                             onSwipeProgress={progress => console.info(`Swipe progress: ${progress}%`)}
-                            
                             >
                                  <VescoveredUser
                                     key={e.email}
@@ -137,11 +133,9 @@ export default function Vescovered(props) {
                                     />
                             </SwipeableListItem>
                         </SwipeableList>
-                
-               
             })
         }
-
+        
         {isOpen && <ViewUserPopUp
       content={<>
       <table className='view-user-table'>
@@ -157,7 +151,7 @@ export default function Vescovered(props) {
                     && userDetails.secondName !== undefined ? `${userDetails.firstName} ${userDetails.secondName}` : "" } </th>
                     </tr>
                     <tr>
-                    <th scope="row"colSpan={2}><h3>{userDetails.age !== undefined ? userDetails.age : ""}</h3></th>
+                    <th scope="row"colSpan={2}><h3>{userDetails.age !== undefined ? `${userDetails.age} Years Old` : ""}</h3></th>
                     </tr>
                     <tr>
                     <th scope="row"colSpan={2}> <h3>{`Vegan For: ${userDetails.veganFor !== undefined ? userDetails.veganFor : ""}`}</h3> </th>
@@ -212,11 +206,6 @@ export default function Vescovered(props) {
       </>}
       handleClose={togglePopup}
     />} 
-        
-        
         </div>
-
-        
-
     )
 }

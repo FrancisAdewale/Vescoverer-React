@@ -14,15 +14,9 @@ export default function Login() {
     const [longitude, setLongitude] = useState(null);
     const [completedReg, setCompletedReg] = useState(false)
     
-
-
-    
     useEffect(() => {
         getCoords()
-      
-
     }, [])
-
 
     const getCoords = async () => {
         const pos = await new Promise((resolve, reject) => {
@@ -38,8 +32,7 @@ export default function Login() {
 
                 auth.signInWithPopup(provider)
                 .then((result) => {
-                    
-
+        
                     db.collection("users").doc(result.user.email).get()
                     .then(doc => {
                         if (doc.exists) {
@@ -65,32 +58,20 @@ export default function Login() {
                                    firstName : firstName,
                                    secondName : secondName,
                                    completedRegistration: false
-                       
                                })
                                .catch(error => {
                                    console.log(error)
                                })
-                       
                                    navigate("/register")
-
-                            }
-                            
-                            
+                            } 
                         } else {
                             navigate("/register")
-
                         }
                     })
-                    
                     .catch(error => {
                         console.log(error)
                     })
-
-                
-
              }).catch(alert)
-
-
         }
     
     return (

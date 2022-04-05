@@ -7,24 +7,13 @@ import Upload from "./componenets/Upload"
 import Socials from "./componenets/Socials"
 import "./Register.css"
 import {auth , provider, db} from './firebase.js';
-import { Navigate, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 
 
 export default function Register() {
 
-
-
     const navigate = useNavigate()
-
     const user = auth.currentUser.email
     const [veganForShake, setVeganForShake] = useState(false);
-
-
-
-
-
-    //make array of objects
     const [sections, setSections] = useState(
         [
             {name : "Vegan For", veganForCompleted : false},
@@ -35,9 +24,6 @@ export default function Register() {
             {name : "Socials", socialsCompleted : false}
     ]
     )
-
-    console.log(sections)
-
     const [sectionCount, setSectionCount] = useState(0)
 
     const changeRegState = (e) => {
@@ -48,23 +34,6 @@ export default function Register() {
         console.log(id)
         
         if(id === "vegan") {
-
-            db.collection("users").doc(user).get()
-        .then(doc => {
-            if (doc.exists) {
-
-                if(doc.data().veganFor === null) {
-
-                }
-                
-
-
-               
-            }
-        })
-        .catch(error => {
-            console.log(error)
-        })
 
                 setSectionCount(sectionCount => sectionCount + 1)
 
@@ -77,11 +46,10 @@ export default function Register() {
                 temp_state[0] = temp_element
 
                 setSections(temp_state)
-          
+                 
         } 
         
         if(id === "name") {
-
 
             setSectionCount(sectionCount => sectionCount + 1)
             let temp_state = [...sections]
@@ -175,7 +143,7 @@ export default function Register() {
         callback={changeRegState}
         />
 
-    case (sections[1].nameCompleted && sections[2].ageCompleted && sections[0].veganForCompleted && sections[3].genderCompleted === false):
+       case (sections[1].nameCompleted && sections[2].ageCompleted && sections[0].veganForCompleted && sections[3].genderCompleted === false):
         return <Gender
         callback={changeRegState}
         />
@@ -190,7 +158,7 @@ export default function Register() {
         callback={changeRegState}
         />
 
-      default:
+        default:
         return <VeganFor 
         isCompleted={sections.veganForCompleted}
         callback={changeRegState}
@@ -198,11 +166,7 @@ export default function Register() {
     }
  
     })()
-    } 
-                
-
-
-                
+    }       
             </div>
         </div>
     </div>
