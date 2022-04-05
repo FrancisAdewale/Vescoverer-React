@@ -7,6 +7,8 @@ import Upload from "./componenets/Upload"
 import Socials from "./componenets/Socials"
 import "./Register.css"
 import {auth , provider, db} from './firebase.js';
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 
 export default function Register() {
