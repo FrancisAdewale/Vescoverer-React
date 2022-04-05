@@ -103,7 +103,7 @@ export default function Dashboard() {
 
         Geocode.fromLatLng(lat, lng).then(
             (response) => {
-                const address = response.results[2].formatted_address;
+                const address = response.results[3].formatted_address;
                 setAddress(address)
             },
             (error) => {
@@ -131,11 +131,6 @@ export default function Dashboard() {
 
     }
 
-
-
-
-
-       
 
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
@@ -233,7 +228,9 @@ export default function Dashboard() {
     return (
         <div className="dashboard-outer">
             <div className="dashboard-middle">
-                <div className="dashboard-inner">
+                <div className="dashboard-inner" style={{
+                    marginBottom : "20px"
+                }}>
 
                     <Paper square>
                     <Tabs

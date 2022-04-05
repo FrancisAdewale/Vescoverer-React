@@ -6,11 +6,9 @@ import instagram from "../imgs/instagram-256.png"
 
 export default function Socials(props) {
 
-
     const user = auth.currentUser.email
 
     const handleInstagram = () => {
-
         const instagram = prompt("What is your Instagram? Without @ symbol")
         db.collection("users").doc(user).set({
             instagram : instagram
@@ -26,8 +24,6 @@ export default function Socials(props) {
     
     }
 
-
-
     return (
         <>
             <div className="socials-container">
@@ -37,6 +33,5 @@ export default function Socials(props) {
             <button className="socials-done-btn" id="socials" onClick={(e) => props.callback(e)}>Done</button>
         </>
         
-
     )
 }

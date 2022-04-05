@@ -6,9 +6,6 @@ import '../Marker.css';
 const Marker = (props) => {
 
     const { color, name, id,} = props;
-
-
-
       const hover = e => {
           e.target.style.backgroundColor = "#272829"
       }
@@ -17,7 +14,6 @@ const Marker = (props) => {
         e.target.style.backgroundColor = "#3797A4"
       }
     
-
     return (
       <div className={"marker"}
         style={{ backgroundColor: color, cursor: 'pointer'}}

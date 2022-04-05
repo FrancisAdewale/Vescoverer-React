@@ -13,26 +13,21 @@ const user = auth.currentUser.email
 const [selectedDate, setSelectedDate] = useState(new Date(2000, 10, 10));
 const [age, setAge] = useState(0)
 
-  const handleDateChange = (date) => {
+const actualAge = calculateAge(new Date(selectedDate.getFullYear(),selectedDate.getMonth(), selectedDate.getUTCDate()))
+    
 
-    setSelectedDate(date)
+const h3Eele = document.getElementById("actual-age")
 
-  }
-   
-    const actualAge = calculateAge(new Date(selectedDate.getFullYear(),selectedDate.getMonth(), selectedDate.getUTCDate()))
-    // setAge(actualAge)
+const handleDateChange = (date) => {
+  setSelectedDate(date)
+}
 
-    const h3Eele = document.getElementById("actual-age")
-
-    // h3Eele.textContent = age
 
     db.collection("users").doc(user).set({
         age : actualAge
 
         }, { merge: true })
   
-  
-
   function calculateAge(date) 
   {
     const now = new Date();
@@ -55,16 +50,11 @@ const [age, setAge] = useState(0)
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
-                }}
-                
+                }}  
             />
             </MuiPickersUtilsProvider>
             <h3 id="actual-age"></h3>
             <button className="age-done-btn" id="age" onClick={(e) => props.callback(e)}>Next</button>
             </div>
-            
-
-        )
-     
-          
+        )       
 }

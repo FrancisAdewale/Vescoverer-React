@@ -1,4 +1,3 @@
-import { findByAltText } from "@testing-library/react";
 import React, {useEffect, useState} from "react"
 import {auth , provider, db} from '../firebase.js';
 
@@ -7,12 +6,6 @@ export default function Name(props) {
 
     const [firstName, setFirstName] = useState("")
     const [secondName, setSecondName] = useState("")
-    
-
-
-
-
-
     const user = auth.currentUser.email
     const firstEle = document.getElementById("firstName")
     const secondEle = document.getElementById("secondName")
@@ -32,9 +25,7 @@ export default function Name(props) {
                     firstEle.value = firstName
                     secondEle.value = secondName
 
-                }
-
-               
+                }  
             }
         })
         .catch(error => {
@@ -43,16 +34,9 @@ export default function Name(props) {
 
     }, [firstName, secondName])
         
-      
-   
-  
-
-
    const handleFirstName = (e) => {
 
     const {required, value} = e.target
-
-   
 
     db.collection("users").doc(user).set({
         firstName : firstEle.value
@@ -64,17 +48,11 @@ export default function Name(props) {
 
     const {required, value} = e.target
 
-
-
-
     db.collection("users").doc(user).set({
         secondName : secondEle.value
 
         }, { merge: true })
    }
-
-
-
 
     return (
         <form className="form--fullname">
