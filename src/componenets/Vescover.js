@@ -93,7 +93,7 @@ export default function Vescover(props) {
     return (
         <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyCwE_g8rAeCVTtWv_n1wgOsiU3QHHjppHQ", language: 'en',
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_REACT_API, language: 'en',
           region: 'en',}}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
